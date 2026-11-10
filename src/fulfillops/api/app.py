@@ -1,7 +1,8 @@
-"""The FastAPI app: health, catalog, inventory and /metrics.
+"""The FastAPI app: health, catalog, inventory, orders and /metrics.
 
-Orders come in the next step. Routes are plain `def`, so each request borrows
-one connection from the pool and runs in FastAPI's thread pool.
+Routes are plain `def`, so each request borrows one connection from the pool
+and runs in FastAPI's thread pool. Only POST /orders is `async`, because it has
+to read the raw body; it hands the database work to the thread pool.
 """
 
 from __future__ import annotations
@@ -12,11 +13,19 @@ import time
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
+from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import JSONResponse, Response
 from prometheus_client import CONTENT_TYPE_LATEST, generate_latest
 
 from fulfillops.api.errors import ApiError, install_error_handlers
 from fulfillops.api.metrics import Metrics
+from fulfillops.api.orders import (
+    MAX_BODY_BYTES,
+    check_idempotency_key,
+    create_order,
+    get_order,
+    parse_order,
+)
 from fulfillops.common.db import create_pool
 from fulfillops.common.migrate import run_migrations, schema_is_current
 from fulfillops.common.settings import Settings, load_settings
@@ -108,6 +117,20 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         if row is None:
             raise ApiError(404, "SKU_NOT_FOUND", "Unknown SKU")
         return row
+
+    @app.post("/api/v1/orders", status_code=202)
+    async def post_order(request: Request):
+        key = check_idempotency_key(request.headers.get("idempotency-key"))
+        declared = request.headers.get("content-length")
+        if declared and declared.isdigit() and int(declared) > MAX_BODY_BYTES:
+            raise ApiError(400, "INVALID_REQUEST", "Request body is too large")
+        order = parse_order(await request.body())
+        receipt = await run_in_threadpool(create_order, request.app.state.pool, key, order)
+        return {"order_id": receipt.order_id, "status": receipt.status}
+
+    @app.get("/api/v1/orders/{order_id}")
+    def read_order(order_id: str, request: Request):
+        return get_order(request.app.state.pool, order_id)
 
     @app.get("/metrics")
     def metrics(request: Request):

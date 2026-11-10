@@ -1,13 +1,21 @@
 {
   "info": {
     "name": "FulfillOps API",
-    "description": "Run against an isolated TEST environment only. Step 4: health, catalog, inventory, metrics.",
+    "description": "Run against an isolated TEST environment only. Steps 4-5: health, catalog, inventory, metrics, orders.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
     {
       "key": "baseUrl",
       "value": "http://localhost:8080"
+    },
+    {
+      "key": "key",
+      "value": ""
+    },
+    {
+      "key": "orderId",
+      "value": ""
     }
   ],
   "item": [
@@ -255,6 +263,429 @@
             "metrics"
           ]
         }
+      }
+    },
+    {
+      "name": "09 Create order",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.collectionVariables.set('key', 'pm-demo-' + Date.now());"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('202 queued with an order_id', () => { pm.response.to.have.status(202); const b = pm.response.json(); pm.expect(b.status).to.eql('queued'); pm.expect(b.order_id).to.be.a('string').and.not.empty; pm.collectionVariables.set('orderId', b.order_id); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{key}}"
+          }
+        ],
+        "description": "Makes a new Idempotency-Key each run. Uses 1 KIT-100.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"customer_id\":\"CUST-042\",\"items\":[{\"sku\":\"KIT-100\",\"quantity\":1}]}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders"
+          ]
+        }
+      }
+    },
+    {
+      "name": "10 Replay same key and body",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('202 and the same order_id', () => { pm.response.to.have.status(202); pm.expect(pm.response.json().order_id).to.eql(pm.collectionVariables.get('orderId')); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{key}}"
+          }
+        ],
+        "description": "No second reservation: check KIT-100 stock did not drop again.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"customer_id\":\"CUST-042\",\"items\":[{\"sku\":\"KIT-100\",\"quantity\":1}]}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders"
+          ]
+        }
+      }
+    },
+    {
+      "name": "11 Same key, different body",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('409 IDEMPOTENCY_CONFLICT', () => { pm.response.to.have.status(409); pm.expect(pm.response.json().error.code).to.eql('IDEMPOTENCY_CONFLICT'); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "{{key}}"
+          }
+        ],
+        "description": "",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"customer_id\":\"CUST-042\",\"items\":[{\"sku\":\"KIT-100\",\"quantity\":2}]}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders"
+          ]
+        }
+      }
+    },
+    {
+      "name": "12 Missing Idempotency-Key",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('400 IDEMPOTENCY_REQUIRED', () => { pm.response.to.have.status(400); pm.expect(pm.response.json().error.code).to.eql('IDEMPOTENCY_REQUIRED'); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"customer_id\":\"CUST-042\",\"items\":[{\"sku\":\"KIT-100\",\"quantity\":1}]}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders"
+          ]
+        }
+      }
+    },
+    {
+      "name": "13 Invalid JSON",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('400 INVALID_JSON', () => { pm.response.to.have.status(400); pm.expect(pm.response.json().error.code).to.eql('INVALID_JSON'); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "pm-badjson-0001"
+          }
+        ],
+        "description": "",
+        "body": {
+          "mode": "raw",
+          "raw": "{not json"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders"
+          ]
+        }
+      }
+    },
+    {
+      "name": "14 Structure error (no items)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('400 INVALID_REQUEST', () => { pm.response.to.have.status(400); pm.expect(pm.response.json().error.code).to.eql('INVALID_REQUEST'); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "pm-struct-0001"
+          }
+        ],
+        "description": "",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"customer_id\":\"CUST-042\",\"items\":[]}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders"
+          ]
+        }
+      }
+    },
+    {
+      "name": "15 Invalid quantity",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('422 INVALID_QUANTITY', () => { pm.response.to.have.status(422); pm.expect(pm.response.json().error.code).to.eql('INVALID_QUANTITY'); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "pm-qty-0001"
+          }
+        ],
+        "description": "",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"customer_id\":\"CUST-042\",\"items\":[{\"sku\":\"KIT-100\",\"quantity\":0}]}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders"
+          ]
+        }
+      }
+    },
+    {
+      "name": "16 Invalid SKU",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('422 INVALID_SKU', () => { pm.response.to.have.status(422); pm.expect(pm.response.json().error.code).to.eql('INVALID_SKU'); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "pm-sku-0001"
+          }
+        ],
+        "description": "",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"customer_id\":\"CUST-042\",\"items\":[{\"sku\":\"NOPE-1\",\"quantity\":1}]}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders"
+          ]
+        }
+      }
+    },
+    {
+      "name": "17 Out of stock (no partial reservation)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('409 OUT_OF_STOCK', () => { pm.response.to.have.status(409); pm.expect(pm.response.json().error.code).to.eql('OUT_OF_STOCK'); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Idempotency-Key",
+            "value": "pm-stock-0001"
+          }
+        ],
+        "description": "KIT-100 cannot cover 20, so PART-200 must stay untouched. Check inventory afterwards.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"customer_id\":\"CUST-042\",\"items\":[{\"sku\":\"PART-200\",\"quantity\":1},{\"sku\":\"KIT-100\",\"quantity\":20}]}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders"
+          ]
+        }
+      }
+    },
+    {
+      "name": "18 Read the order",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('200 with status and total', () => { pm.response.to.have.status(200); const b = pm.response.json(); pm.expect(['queued','processing','completed','failed']).to.include(b.status); pm.expect(b.total_cents).to.eql(1299); pm.expect(b.order_id).to.eql(pm.collectionVariables.get('orderId')); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/orders/{{orderId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "orders",
+            "{{orderId}}"
+          ]
+        },
+        "description": "Stays queued until the worker exists; becomes completed within 15 s once it runs."
       }
     }
   ]
