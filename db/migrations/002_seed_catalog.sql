@@ -1,5 +1,4 @@
--- 002_seed_catalog.sql: the three fixed products and their starting stock (API contract).
--- ON CONFLICT DO NOTHING means a restart or a re-run never recreates stock that was spent.
+-- the three fixed products; ON CONFLICT means a restart never resets spent stock
 INSERT INTO products (sku, unit_price_cents, available) VALUES
     ('KIT-100',  1299,  7),
     ('PART-200',  599, 12),

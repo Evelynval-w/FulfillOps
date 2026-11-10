@@ -1,7 +1,4 @@
-"""Migration runner tests. They need a disposable PostgreSQL: set DATABASE_URL to it.
-
-Each test works in its own temporary schema, so tests never touch each other's tables.
-"""
+"""Migration tests. They need a throwaway database: set DATABASE_URL to it."""
 
 import os
 import uuid

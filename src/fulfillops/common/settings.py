@@ -1,9 +1,4 @@
-"""Application settings, read once from environment variables.
-
-Every variable the app understands is listed here, with its default. Kubernetes (ConfigMap and
-Secret) and Docker Compose only need to provide these names. A missing required variable stops
-the process at startup with a clear message that never prints secret values.
-"""
+"""All settings come from environment variables and are read here."""
 
 from __future__ import annotations
 
@@ -17,7 +12,7 @@ _FALSE = {"0", "false", "no", "off", ""}
 
 
 class ConfigError(RuntimeError):
-    """Raised when a setting is missing or invalid."""
+    """A setting is missing or has a bad value."""
 
 
 def _int(env: Mapping[str, str], name: str, default: int, minimum: int = 1) -> int:
@@ -47,12 +42,12 @@ def _bool(env: Mapping[str, str], name: str, default: bool) -> bool:
 
 @dataclass(frozen=True)
 class Settings:
-    database_url: str  # DATABASE_URL (required, secret: never log it)
-    pool_size: int  # POOL_SIZE: maximum connections per process, default 20
-    port: int  # PORT: HTTP port of the API, default 8080
-    app_env: str  # APP_ENV: "production" (default), "development" or "test"
-    fail_readiness: bool  # FAIL_READINESS: test-only switch, makes /health/ready return 503
-    migrations_dir: Path  # MIGRATIONS_DIR: folder with the numbered .sql files
+    database_url: str  # secret, never log it
+    pool_size: int  # max connections per process
+    port: int
+    app_env: str  # production (default), development or test
+    fail_readiness: bool  # test-only: makes /health/ready return 503
+    migrations_dir: Path
 
     @property
     def is_test(self) -> bool:
@@ -60,7 +55,6 @@ class Settings:
 
 
 def load_settings(env: Mapping[str, str] | None = None) -> Settings:
-    """Build Settings from the given mapping (default: the real environment)."""
     env = os.environ if env is None else env
 
     database_url = env.get("DATABASE_URL", "").strip()

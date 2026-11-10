@@ -1,13 +1,10 @@
-"""Shared database access for the API and the worker (decision D2: one thin helper module).
+"""Database pool shared by the API and the worker.
 
-Sync psycopg with a connection pool (decision: sync, plain SQL, no ORM). A request borrows one
-connection, runs its whole transaction, and gives it back:
+Use it like this: a request borrows one connection, and the transaction
+commits when the block ends or rolls back if something fails.
 
-    with pool.connection() as conn:      # commits on success, rolls back on any exception
+    with pool.connection() as conn:
         conn.execute(...)
-
-The pool opens WITHOUT waiting for the database, so the process starts (and /health/live
-answers) even when PostgreSQL is down; the pool keeps reconnecting in the background.
 """
 
 from __future__ import annotations
@@ -17,8 +14,7 @@ from psycopg_pool import ConnectionPool
 
 from fulfillops.common.settings import Settings
 
-# How long a request waits for a free connection before failing (seconds).
-POOL_TIMEOUT_SECONDS = 10.0
+POOL_TIMEOUT_SECONDS = 10.0  # how long a request waits for a free connection
 
 
 def create_pool(settings: Settings) -> ConnectionPool:
@@ -30,15 +26,15 @@ def create_pool(settings: Settings) -> ConnectionPool:
         kwargs={"row_factory": dict_row},
         open=False,
     )
+    # don't wait for the database, so the API still starts when it is down
     pool.open(wait=False)
     return pool
 
 
 def database_is_reachable(pool: ConnectionPool, timeout: float = 2.0) -> bool:
-    """True if a connection can be borrowed and answers a trivial query."""
     try:
         with pool.connection(timeout=timeout) as conn:
             conn.execute("SELECT 1")
         return True
-    except Exception:  # any failure means "not reachable"; readiness reports it as 503
+    except Exception:
         return False
