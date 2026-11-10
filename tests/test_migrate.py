@@ -1,7 +1,6 @@
 """Migration tests. They need a throwaway database: set DATABASE_URL to it."""
 
 import os
-import uuid
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
@@ -14,16 +13,6 @@ ADMIN_URL = os.environ.get("DATABASE_URL")
 MIGRATIONS = Path(__file__).resolve().parents[1] / "db" / "migrations"
 
 pytestmark = pytest.mark.skipif(not ADMIN_URL, reason="DATABASE_URL (test database) not set")
-
-
-@pytest.fixture
-def schema_url():
-    name = "t_" + uuid.uuid4().hex[:8]
-    with psycopg.connect(ADMIN_URL, autocommit=True) as admin:
-        admin.execute(f"CREATE SCHEMA {name}")
-        sep = "&" if "?" in ADMIN_URL else "?"
-        yield f"{ADMIN_URL}{sep}options=-csearch_path%3D{name}"
-        admin.execute(f"DROP SCHEMA {name} CASCADE")
 
 
 def stock(url):
