@@ -53,7 +53,7 @@ def check_idempotency_key(value: str | None) -> str:
 def parse_order(body: bytes) -> OrderRequest:
     """Validate in the order the contract lists: size, JSON, structure, SKU, quantity."""
     if len(body) > MAX_BODY_BYTES:
-        raise ApiError(400, "INVALID_REQUEST", "Request body is too large")
+        raise ApiError(413, "INVALID_REQUEST", "Request body is too large (limit 16 KiB)")
     try:
         data = json.loads(body)
     except (ValueError, UnicodeDecodeError):

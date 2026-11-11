@@ -65,9 +65,9 @@ def test_bad_quantity_is_422(quantity):
     assert code_of(raw) == (422, "INVALID_QUANTITY")
 
 
-def test_body_over_16_kib_is_400():
+def test_body_over_16_kib_is_413():
     raw = json.dumps(body([line()], customer="C" * 17000)).encode()
-    assert code_of(raw) == (400, "INVALID_REQUEST")
+    assert code_of(raw) == (413, "INVALID_REQUEST")
 
 
 def test_lines_with_the_same_sku_are_added_and_order_does_not_matter():
@@ -140,9 +140,9 @@ def test_invalid_json_and_unknown_sku_over_http(client):
     assert stock(client, "KIT-100") == 7
 
 
-def test_body_over_16_kib_over_http(client):
+def test_body_over_16_kib_over_http_is_413(client):
     r = post(client, body([line()], customer="C" * 17000))
-    assert (r.status_code, r.json()["error"]["code"]) == (400, "INVALID_REQUEST")
+    assert (r.status_code, r.json()["error"]["code"]) == (413, "INVALID_REQUEST")
 
 
 def test_duplicate_lines_are_added_together(client):
