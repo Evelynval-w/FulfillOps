@@ -1,0 +1,29 @@
+diff --git a/src/fulfillops/api/orders.py b/src/fulfillops/api/orders.py
+index 5826262..9942050 100644
+--- a/src/fulfillops/api/orders.py
++++ b/src/fulfillops/api/orders.py
+@@ -119,15 +119,17 @@ def create_order(pool: ConnectionPool, key: str, order: OrderRequest) -> Receipt
+                 raise ApiError(409, "IDEMPOTENCY_CONFLICT", "Key was used with a different request")
+             return Receipt(existing["id"])
+ 
+-        # SKUs are sorted, so concurrent orders lock rows in the same order: no deadlocks
++        # DEMO BUG (do not commit): read the stock, check it in Python, then write it back.
++        # Two requests can read the same value, so both pass the check and one update is lost.
+         for sku, qty in order.lines:
+-            reserved = conn.execute(
+-                "UPDATE products SET available = available - %s WHERE sku = %s AND available >= %s",
+-                (qty, sku, qty),
+-            )
+-            if reserved.rowcount == 0:
+-                # raising rolls everything back, including the order row and earlier SKUs
++            current = conn.execute(
++                "SELECT available FROM products WHERE sku = %s", (sku,)
++            ).fetchone()["available"]
++            if current < qty:
+                 raise ApiError(409, "OUT_OF_STOCK", "Not enough items available")
++            conn.execute(
++                "UPDATE products SET available = %s WHERE sku = %s", (current - qty, sku)
++            )
+         for sku, qty in order.lines:
+             conn.execute(
+                 "INSERT INTO order_items (order_id, sku, quantity) VALUES (%s, %s, %s)",
