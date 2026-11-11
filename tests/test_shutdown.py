@@ -1,53 +1,18 @@
 """SIGTERM: a request that is already running finishes, then the API exits cleanly."""
 
-import http.client
 import json
 import os
 import signal
-import socket
 import subprocess
 import sys
 import threading
 import time
-from pathlib import Path
 
 import psycopg
 import pytest
+from stack import CLEAN_EXIT, MIGRATIONS, ROOT, call, free_port, wait_until
 
 from fulfillops.common.migrate import run_migrations
-
-ROOT = Path(__file__).resolve().parents[1]
-MIGRATIONS = ROOT / "db" / "migrations"
-
-
-# uvicorn finishes its graceful shutdown and then re-raises SIGTERM, so a clean stop
-# shows up as 0 or as -15 depending on the uvicorn version. Both mean "shut down properly".
-CLEAN_EXIT = (0, -signal.SIGTERM)
-
-
-def free_port() -> int:
-    with socket.socket() as s:
-        s.bind(("127.0.0.1", 0))
-        return s.getsockname()[1]
-
-
-def wait_until(check, seconds=15.0):
-    end = time.time() + seconds
-    while time.time() < end:
-        try:
-            if check():
-                return True
-        except OSError:
-            pass
-        time.sleep(0.1)
-    return False
-
-
-def call(port, method, path, body=None, headers=None):
-    conn = http.client.HTTPConnection("127.0.0.1", port, timeout=20)
-    conn.request(method, path, body=body, headers=headers or {})
-    response = conn.getresponse()
-    return response.status, response.read()
 
 
 def test_request_in_flight_finishes_then_api_exits_cleanly(schema_url):

@@ -123,7 +123,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         key = check_idempotency_key(request.headers.get("idempotency-key"))
         declared = request.headers.get("content-length")
         if declared and declared.isdigit() and int(declared) > MAX_BODY_BYTES:
-            raise ApiError(400, "INVALID_REQUEST", "Request body is too large")
+            raise ApiError(413, "INVALID_REQUEST", "Request body is too large (limit 16 KiB)")
         order = parse_order(await request.body())
         receipt = await run_in_threadpool(create_order, request.app.state.pool, key, order)
         return {"order_id": receipt.order_id, "status": receipt.status}
