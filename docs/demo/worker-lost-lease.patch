@@ -1,0 +1,20 @@
+--- a/src/fulfillops/worker/queue.py
++++ b/src/fulfillops/worker/queue.py
+@@ -60,7 +60,7 @@
+ UPDATE jobs
+ SET state = 'done', locked_by = NULL, lease_expires_at = NULL, last_error = NULL,
+     updated_at = now()
+-WHERE id = %s AND state = 'claimed' AND locked_by = %s AND attempts = %s
++WHERE id = %s AND state = 'claimed' AND locked_by = %s
+ RETURNING order_id
+ """
+ 
+@@ -136,7 +136,7 @@
+ def complete_job(pool: ConnectionPool, job: Job, worker_id: str) -> bool:
+     """Finish the job and the order together. False means the lease was lost (nothing changed)."""
+     with pool.connection() as conn, conn.transaction():
+-        done = conn.execute(_DONE_JOB_SQL, (job.id, worker_id, job.attempts)).fetchone()
++        done = conn.execute(_DONE_JOB_SQL, (job.id, worker_id)).fetchone()
+         if done is None:
+             return False
+         conn.execute(

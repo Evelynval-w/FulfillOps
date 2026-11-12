@@ -1,0 +1,17 @@
+# AI assistance log
+
+Rule for this file: one row per real piece of work (code, tests, docs, configuration), not per chat
+question. Each person adds their own rows and does not edit the rows of others. The last column
+says what the person did or checked personally; it must be true.
+
+| Date | Person | Tool | What the AI helped with | What I decided, did and checked myself |
+|------|--------|------|-------------------------|-----------------------------------------|
+| 2026-11-11 | Saad (B) | Claude | Drafted the worker: claim with `SKIP LOCKED`, lease, guarded completion, retries with backoff, dead letter, SIGTERM stop (`src/fulfillops/worker/`) | Chose the design direction with Maku (jobs table is the queue, metrics from the database, no worker `/metrics` port, poison job by environment variable). Ran the 14 worker tests on my Windows machine against PostgreSQL in Docker. I can explain each function in `queue.py` and `runner.py`. |
+| 2026-11-11 | Saad (B) | Claude | Wrote `tests/test_worker.py` (lost lease, crash recovery, poison job, two workers, SIGTERM) | Ran them locally; the same scenarios are also covered end to end by Maku's `tests/test_integration.py` |
+| 2026-11-12 | Saad (B) | Claude | Worker startup fix (log once, back off, recover) and the `_int` to `int_setting` rename | Checked the diff (4 files), ran the worker tests, opened the pull request |
+| 2026-11-12 | Saad (B) | Claude | Drafted `docs/ADR-003.md` and `docs/threat-model.md` | Read both against the worker code and the contract and corrected what I could not defend. Opened the pull request (#9) for review. |
+| 2026-11-12 | Saad (B) | Claude | Wrote `scripts/measure_p95.py` (200 samples per endpoint, p95, completion time) | Ran it on my machine (1 API, 2 workers), checked the numbers against the server histogram, committed the evidence files |
+| 2026-11-12 | Saad (B) | Claude | Wrote the worker "break it on purpose" demo (`scripts/demo-worker-bug.*`) | Ran it: the guard test went red with the planted bug and green after the restore |
+| 2026-11-12 | Saad (B) | Claude | Explained git, Docker and PowerShell commands | Ran every command myself, fixed my own environment (stopped container, missing `DATABASE_URL`) |
+
+Not AI-assisted: team decisions, group messages and review comments.
