@@ -60,8 +60,8 @@ SQL or stack traces. Validation runs in this order:
 | Body over 16 KiB | 413 `INVALID_REQUEST` (our decision, see ADR-001 section 6) |
 | Body is not JSON | 400 `INVALID_JSON` |
 | Wrong structure (customer id, 1 to 10 items) | 400 `INVALID_REQUEST` |
-| Unknown or badly formed SKU | 422 `INVALID_SKU` |
-| Quantity not a whole number of at least 1 | 422 `INVALID_QUANTITY` |
+| Empty or unknown SKU | 422 `INVALID_SKU` |
+| Quantity not a whole number from 1 to 20 | 422 `INVALID_QUANTITY` |
 | Not enough stock | 409 `OUT_OF_STOCK` |
 | Same key, different body | 409 `IDEMPOTENCY_CONFLICT` |
 | Unknown SKU or order on a read | 404 `SKU_NOT_FOUND` / `ORDER_NOT_FOUND` |
@@ -102,7 +102,7 @@ uv run ruff check . && uv run ruff format --check .
 uv run pytest -q
 ```
 
-Expect **79 passed, 0 skipped**. Without `DATABASE_URL` the database tests are skipped and the run
+Expect every test to pass with **0 skipped**. (SIGTERM tests skip on Windows only.) Without `DATABASE_URL` the database tests are skipped and the run
 only looks green, so make sure it is set (CI included). Each test works in its own temporary schema,
 so the suite does not disturb data in the test database.
 
@@ -128,7 +128,8 @@ python3 fulfillops_public_checker.py --base-url http://localhost:8080 --concurre
 
 Our result on a freshly reset database is **15 passed, 0 failed, 0 skipped**. Each run uses up some
 of the seeded stock, so on repeated runs the contention and stress checks may skip. Reset the
-database (drop and recreate it, then restart the API) before running it again.
+test data before running it again: `APP_ENV=test python scripts/reset_test_data.py --yes` (stop the
+workers first). The script refuses to run unless `APP_ENV=test`.
 
 ## Demos
 
