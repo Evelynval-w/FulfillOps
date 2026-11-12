@@ -63,3 +63,24 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t fulfillops:ci .
+
+
+      - name: Generate Docker image SBOM
+        uses: anchore/sbom-action@v0.24.3
+        with:
+          image: fulfillops:ci
+          format: cyclonedx-json
+          output-file: fulfillops-sbom.cdx.json
+          artifact-name: fulfillops-sbom
+          upload-artifact: true
+          upload-release-assets: false
+
+      - name: Scan Docker image for vulnerabilities
+        uses: aquasecurity/trivy-action@0.36.0
+        with:
+          image-ref: fulfillops:ci
+          format: table
+          exit-code: "1"
+          ignore-unfixed: true
+          vuln-type: os,library
+          severity: HIGH,CRITICAL
