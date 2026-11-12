@@ -1,0 +1,65 @@
+
+name: FulfillOps CI
+
+on:
+  push:
+    branches:
+      - main
+      - "feat/**"
+      - "fix/**"
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Lint, Test and Build
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: fulfillops
+          POSTGRES_PASSWORD: fulfillops_test
+          POSTGRES_DB: fulfillops_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U fulfillops -d fulfillops_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      DATABASE_URL: postgresql://fulfillops:fulfillops_test@localhost:5432/fulfillops_test
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.13.7"
+
+      - name: Install Python
+        run: uv python install 3.13
+
+      - name: Install dependencies
+        run: uv sync --frozen --all-groups
+
+      - name: Ruff lint
+        run: uv run ruff check .
+
+      - name: Ruff format check
+        run: uv run ruff format --check .
+
+      - name: Run automated tests
+        run: uv run pytest -v
+
+      - name: Build Docker image
+        run: docker build -t fulfillops:ci .
