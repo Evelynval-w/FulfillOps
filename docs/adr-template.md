@@ -2,7 +2,7 @@
 
 - **Status:** Proposed | Accepted | Superseded by ADR-00Y
 - **Date:** YYYY-MM-DD
-- **Owner:** Person A | B | C (reviewed by the other two through a pull request)
+- **Owner:** Makuo | Saad | Tony (reviewed by the other two through a pull request)
 - **Scope:** one sentence on what this record decides
 
 ## 1. Context

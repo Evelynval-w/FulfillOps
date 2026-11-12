@@ -167,7 +167,7 @@ Screenshots of a full run are in `docs/postman/run_photos/`.
 
 ## Docker, CI and Kubernetes
 
-Owned by Person C. This section is a placeholder until their work is merged: image build, Docker
+Owned by Tony. This section is a placeholder until their work is merged: image build, Docker
 Compose, the CI workflow, the Kubernetes manifests in `infra/k8s` and the Argo CD application in
 `infra/argocd`, plus the cluster race proof.
 
@@ -179,5 +179,5 @@ Compose, the CI workflow, the Kubernetes manifests in `infra/k8s` and the Argo C
 
 ## Team
 
-Three people, three areas: the API and stock reservation (Person A), the worker and reliability
-(Person B), and Docker, CI and Kubernetes with Argo CD (Person C).
+Three people, three areas: the API and stock reservation (Makuo), the worker and reliability
+(Saad), and Docker, CI and Kubernetes with Argo CD (Tony).

@@ -7,7 +7,7 @@ A postmortem explains what happened and how the system and the team can do bette
 look for a person to blame. Both incidents below are controlled failures, injected on purpose in
 our isolated test environment.
 
-## Incident 1: a worker is killed while processing a committed order (owner: Person B)
+## Incident 1: a worker is killed while processing a committed order (owner: Saad)
 
 **Summary.** [One or two sentences: which worker was killed with which signal, which order it was
 processing, how the order ended.]
@@ -61,7 +61,7 @@ no alert fired; the retry metric also counts crash recoveries.]
 **Evidence.** [Attempt count 5, `last_error`, order status `failed`, `fulfillops_orders_failed_total`
 before and after, logs with the five attempts.]
 
-## Incident 2: failed API rolling release (owner: Person C, with Person A)
+## Incident 2: failed API rolling release (owner: Tony, with Makuo)
 
 **Summary.** [A revision with `FAIL_READINESS=true` was pushed to Git; Argo CD synced it; the new
 pods never became ready; the rollout stopped; the old pods kept serving.]
@@ -71,7 +71,7 @@ the old pods answering, `git revert`, Argo CD sync, new healthy revision.]
 **Root cause.** [A deliberately unhealthy revision.]
 **Detection.** [`/health/ready` returns 503, pods `0/1 Ready`, Argo CD Progressing or Degraded.]
 **Recovery.** [Git revert; Argo CD restored the last good revision; committed orders were not lost.]
-**Action items.** [Owner: Person C.]
+**Action items.** [Owner: Tony.]
 
 ## Evidence index (fill as you save the files)
 | Item | File or command |
