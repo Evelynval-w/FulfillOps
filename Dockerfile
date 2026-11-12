@@ -35,6 +35,16 @@ ENV PATH="/app/.venv/bin:$PATH" \
 
 WORKDIR /app
 
+# Apply security updates and remove unused system pip
+RUN apt-get update && \
+    apt-get upgrade -y --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /usr/local/lib/python3.13/site-packages/pip \
+           /usr/local/lib/python3.13/site-packages/pip-*.dist-info \
+           /usr/local/bin/pip \
+           /usr/local/bin/pip3 \
+           /usr/local/bin/pip3.13
+
 # Create an unprivileged runtime user
 RUN groupadd --system app && \
     useradd --system --gid app --create-home app
