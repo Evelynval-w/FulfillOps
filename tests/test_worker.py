@@ -246,3 +246,33 @@ def test_sigterm_finishes_the_current_job_then_stops(pool, env):
     t.join(timeout=5)
     assert not t.is_alive()
     assert order_status(pool, oid) == "completed"
+
+
+# ---------- starting before the API has migrated ----------
+
+
+def test_worker_started_before_migration_logs_once_then_recovers(schema_url, caplog):
+    caplog.set_level("INFO", logger="fulfillops.worker")
+    env = {"DATABASE_URL": schema_url, "APP_ENV": "test", "PROCESSING_SECONDS": "0"}
+    p = create_pool(load_settings(env))
+    p.wait()
+    try:
+        w = make_worker(p, env, poll_interval_s=0.05)  # schema is still empty: no tables
+        t = threading.Thread(target=w.run_forever)
+        t.start()
+        time.sleep(1.5)  # many failed loops
+        cannot = [r for r in caplog.records if "cannot work yet" in r.getMessage()]
+        assert len(cannot) == 1, "the same error must be logged once, not on every loop"
+        assert "UndefinedTable" in cannot[0].getMessage()
+
+        run_migrations(schema_url, MIGRATIONS)  # the API finally migrates
+        oid = new_order(p, "key-late-migr-01")
+        deadline = time.time() + 10
+        while order_status(p, oid) != "completed" and time.time() < deadline:
+            time.sleep(0.1)
+        w.stop.set()
+        t.join(timeout=5)
+        assert order_status(p, oid) == "completed"
+        assert any("recovered" in r.getMessage() for r in caplog.records)
+    finally:
+        p.close()

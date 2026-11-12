@@ -15,7 +15,7 @@ class ConfigError(RuntimeError):
     """A setting is missing or has a bad value."""
 
 
-def _int(env: Mapping[str, str], name: str, default: int, minimum: int = 1) -> int:
+def int_setting(env: Mapping[str, str], name: str, default: int, minimum: int = 1) -> int:
     raw = env.get(name)
     if raw is None or raw.strip() == "":
         return default
@@ -67,8 +67,8 @@ def load_settings(env: Mapping[str, str] | None = None) -> Settings:
 
     return Settings(
         database_url=database_url,
-        pool_size=_int(env, "POOL_SIZE", 20),
-        port=_int(env, "PORT", 8080),
+        pool_size=int_setting(env, "POOL_SIZE", 20),
+        port=int_setting(env, "PORT", 8080),
         app_env=app_env,
         fail_readiness=_bool(env, "FAIL_READINESS", False),
         migrations_dir=Path(env.get("MIGRATIONS_DIR", "db/migrations")),
