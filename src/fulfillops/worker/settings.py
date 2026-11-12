@@ -10,7 +10,7 @@ import socket
 from collections.abc import Mapping
 from dataclasses import dataclass
 
-from fulfillops.common.settings import ConfigError, Settings, _int, load_settings
+from fulfillops.common.settings import ConfigError, Settings, int_setting, load_settings
 
 
 def _float(env: Mapping[str, str], name: str, default: float, minimum: float = 0.0) -> float:
@@ -48,7 +48,7 @@ def load_worker_settings(env: Mapping[str, str] | None = None) -> WorkerSettings
     worker_id = env.get("WORKER_ID", "").strip() or f"{socket.gethostname()}-{os.getpid()}"
     return WorkerSettings(
         base=base,
-        pool_size=_int(env, "WORKER_POOL_SIZE", 3),
+        pool_size=int_setting(env, "WORKER_POOL_SIZE", 3),
         worker_id=worker_id,
         poll_interval_s=_float(env, "POLL_INTERVAL_S", 0.5, 0.05),
         lease_seconds=_float(env, "LEASE_SECONDS", 10.0, 1.0),

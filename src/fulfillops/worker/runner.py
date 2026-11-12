@@ -15,6 +15,8 @@ from fulfillops.worker.settings import WorkerSettings
 
 log = logging.getLogger("fulfillops.worker")
 
+MAX_ERROR_WAIT_S = 5.0  # longest wait between tries while the database or schema is not ready
+
 
 class PoisonJobError(RuntimeError):
     """Raised on purpose for the reserved poison customer (test and development only)."""
@@ -83,14 +85,30 @@ class Worker:
 
     def run_forever(self) -> None:
         log.info("worker=%s started", self.s.worker_id)
+        failing: str | None = None  # error type already logged, so a long outage is one line
+        failures = 0
         while not self.stop.is_set():
             try:
                 busy = self.run_once()
-            except Exception as exc:  # database down, etc: wait and try again
-                log.error(
-                    "worker=%s loop error (%s), retrying", self.s.worker_id, type(exc).__name__
+            except Exception as exc:  # database down, schema not ready yet, etc
+                kind = type(exc).__name__
+                failures += 1
+                if kind != failing:
+                    failing = kind
+                    log.error(
+                        "worker=%s cannot work yet (%s); the schema may not be migrated or the "
+                        "database may be down. Waiting and backing off, not logging this again",
+                        self.s.worker_id,
+                        kind,
+                    )
+                # back off (1 s, 2 s, 4 s ... up to MAX_ERROR_WAIT_S): do not hammer a sick database
+                self.stop.wait(
+                    min(MAX_ERROR_WAIT_S, self.s.poll_interval_s * 2 ** min(failures, 8))
                 )
-                busy = False
+                continue
+            if failing is not None:
+                log.info("worker=%s recovered after %d failed loop(s)", self.s.worker_id, failures)
+                failing, failures = None, 0
             if not busy:
                 self.stop.wait(self.s.poll_interval_s)
         log.info("worker=%s stopped", self.s.worker_id)
