@@ -14,6 +14,10 @@ from stack import CLEAN_EXIT, MIGRATIONS, ROOT, call, free_port, wait_until
 
 from fulfillops.common.migrate import run_migrations
 
+# On Windows, Popen.send_signal(SIGTERM) is a hard kill, so a graceful shutdown cannot be tested
+# there. Production runs on Linux, where this works.
+pytestmark = pytest.mark.skipif(sys.platform == "win32", reason="SIGTERM is a hard kill on Windows")
+
 
 def test_request_in_flight_finishes_then_api_exits_cleanly(schema_url):
     run_migrations(schema_url, MIGRATIONS)
