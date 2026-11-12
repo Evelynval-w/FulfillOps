@@ -1,0 +1,84 @@
+{
+  "date_utc": "2026-11-12T02:23:46+00:00",
+  "label": "windows-2workers-local",
+  "base_url": "http://127.0.0.1:8080",
+  "samples_per_endpoint": 200,
+  "target_p95_ms": 300.0,
+  "python": "3.14.0",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "git_commit": "7b4b59b",
+  "method": "client-side wall time, one keep-alive connection, sequential requests, nearest-rank percentile",
+  "limitations": [
+    "single machine: client, API, workers and database share CPU and memory",
+    "one sequential client: no concurrent load, queueing under load is not measured",
+    "simulated worker processing time, no real external system",
+    "seed data of a few rows: query times do not reflect production data volumes"
+  ],
+  "endpoints": {
+    "POST /orders (new order)": {
+      "samples": 200,
+      "success": 200,
+      "non_2xx": 0,
+      "min_ms": 8.41,
+      "mean_ms": 19.02,
+      "p50_ms": 16.07,
+      "p95_ms": 38.86,
+      "p99_ms": 57.6,
+      "max_ms": 87.38
+    },
+    "GET /orders/{id}": {
+      "samples": 200,
+      "success": 200,
+      "non_2xx": 0,
+      "min_ms": 4.88,
+      "mean_ms": 8.74,
+      "p50_ms": 7.77,
+      "p95_ms": 16.2,
+      "p99_ms": 25.44,
+      "max_ms": 28.97
+    },
+    "POST /orders (replay)": {
+      "samples": 200,
+      "success": 200,
+      "non_2xx": 0,
+      "min_ms": 6.49,
+      "mean_ms": 13.55,
+      "p50_ms": 14.37,
+      "p95_ms": 17.18,
+      "p99_ms": 19.1,
+      "max_ms": 19.92
+    },
+    "GET /catalog": {
+      "samples": 200,
+      "success": 200,
+      "non_2xx": 0,
+      "min_ms": 5.06,
+      "mean_ms": 9.45,
+      "p50_ms": 9.46,
+      "p95_ms": 10.83,
+      "p99_ms": 12.66,
+      "max_ms": 12.89
+    },
+    "GET /inventory/{sku}": {
+      "samples": 200,
+      "success": 200,
+      "non_2xx": 0,
+      "min_ms": 3.97,
+      "mean_ms": 8.56,
+      "p50_ms": 9.21,
+      "p95_ms": 12.05,
+      "p99_ms": 13.93,
+      "max_ms": 14.39
+    }
+  },
+  "server_histogram_p95_ms_post_orders": 35.9,
+  "completion": {
+    "orders": 20,
+    "completed": 20,
+    "timeouts": 0,
+    "within_15s": 20,
+    "p50_ms": 908.6,
+    "p95_ms": 1021.7,
+    "max_ms": 1030.1
+  }
+}

@@ -1,0 +1,1001 @@
+endpoint,status,ms
+POST /orders (new order),202,25.443
+POST /orders (new order),202,17.456
+POST /orders (new order),202,18.725
+POST /orders (new order),202,16.755
+POST /orders (new order),202,16.482
+POST /orders (new order),202,18.115
+POST /orders (new order),202,17.235
+POST /orders (new order),202,15.906
+POST /orders (new order),202,15.984
+POST /orders (new order),202,16.741
+POST /orders (new order),202,27.13
+POST /orders (new order),202,23.843
+POST /orders (new order),202,16.732
+POST /orders (new order),202,15.976
+POST /orders (new order),202,16.519
+POST /orders (new order),202,15.982
+POST /orders (new order),202,16.553
+POST /orders (new order),202,16.459
+POST /orders (new order),202,15.806
+POST /orders (new order),202,15.776
+POST /orders (new order),202,16.174
+POST /orders (new order),202,15.952
+POST /orders (new order),202,14.752
+POST /orders (new order),202,17.211
+POST /orders (new order),202,21.943
+POST /orders (new order),202,32.882
+POST /orders (new order),202,35.279
+POST /orders (new order),202,14.709
+POST /orders (new order),202,12.792
+POST /orders (new order),202,9.515
+POST /orders (new order),202,15.43
+POST /orders (new order),202,9.998
+POST /orders (new order),202,8.409
+POST /orders (new order),202,9.051
+POST /orders (new order),202,9.54
+POST /orders (new order),202,8.567
+POST /orders (new order),202,9.889
+POST /orders (new order),202,8.979
+POST /orders (new order),202,9.573
+POST /orders (new order),202,9.256
+POST /orders (new order),202,9.987
+POST /orders (new order),202,9.039
+POST /orders (new order),202,10.76
+POST /orders (new order),202,10.228
+POST /orders (new order),202,9.558
+POST /orders (new order),202,10.595
+POST /orders (new order),202,10.408
+POST /orders (new order),202,9.809
+POST /orders (new order),202,9.786
+POST /orders (new order),202,10.048
+POST /orders (new order),202,10.352
+POST /orders (new order),202,10.994
+POST /orders (new order),202,10.798
+POST /orders (new order),202,9.643
+POST /orders (new order),202,11.412
+POST /orders (new order),202,9.924
+POST /orders (new order),202,11.816
+POST /orders (new order),202,12.093
+POST /orders (new order),202,11.889
+POST /orders (new order),202,12.486
+POST /orders (new order),202,14.574
+POST /orders (new order),202,16.403
+POST /orders (new order),202,15.322
+POST /orders (new order),202,15.819
+POST /orders (new order),202,16.939
+POST /orders (new order),202,16.001
+POST /orders (new order),202,16.451
+POST /orders (new order),202,19.04
+POST /orders (new order),202,19.74
+POST /orders (new order),202,16.965
+POST /orders (new order),202,16.621
+POST /orders (new order),202,15.006
+POST /orders (new order),202,17.06
+POST /orders (new order),202,16.187
+POST /orders (new order),202,15.66
+POST /orders (new order),202,15.265
+POST /orders (new order),202,17.823
+POST /orders (new order),202,17.035
+POST /orders (new order),202,46.918
+POST /orders (new order),202,36.487
+POST /orders (new order),202,23.512
+POST /orders (new order),202,19.556
+POST /orders (new order),202,14.975
+POST /orders (new order),202,12.55
+POST /orders (new order),202,15.686
+POST /orders (new order),202,14.099
+POST /orders (new order),202,13.5
+POST /orders (new order),202,14.804
+POST /orders (new order),202,14.79
+POST /orders (new order),202,14.882
+POST /orders (new order),202,14.957
+POST /orders (new order),202,16.04
+POST /orders (new order),202,19.826
+POST /orders (new order),202,15.076
+POST /orders (new order),202,12.689
+POST /orders (new order),202,12.814
+POST /orders (new order),202,17.009
+POST /orders (new order),202,21.942
+POST /orders (new order),202,29.072
+POST /orders (new order),202,19.531
+POST /orders (new order),202,22.039
+POST /orders (new order),202,14.915
+POST /orders (new order),202,14.649
+POST /orders (new order),202,13.28
+POST /orders (new order),202,13.156
+POST /orders (new order),202,11.253
+POST /orders (new order),202,12.199
+POST /orders (new order),202,11.114
+POST /orders (new order),202,14.043
+POST /orders (new order),202,12.56
+POST /orders (new order),202,13.09
+POST /orders (new order),202,17.752
+POST /orders (new order),202,22.634
+POST /orders (new order),202,15.154
+POST /orders (new order),202,14.632
+POST /orders (new order),202,14.053
+POST /orders (new order),202,18.449
+POST /orders (new order),202,16.65
+POST /orders (new order),202,17.348
+POST /orders (new order),202,14.793
+POST /orders (new order),202,19.184
+POST /orders (new order),202,17.212
+POST /orders (new order),202,13.767
+POST /orders (new order),202,12.88
+POST /orders (new order),202,12.21
+POST /orders (new order),202,12.5
+POST /orders (new order),202,11.09
+POST /orders (new order),202,12.521
+POST /orders (new order),202,16.37
+POST /orders (new order),202,18.287
+POST /orders (new order),202,51.858
+POST /orders (new order),202,31.022
+POST /orders (new order),202,29.039
+POST /orders (new order),202,30.701
+POST /orders (new order),202,32.499
+POST /orders (new order),202,57.602
+POST /orders (new order),202,44.992
+POST /orders (new order),202,46.562
+POST /orders (new order),202,87.378
+POST /orders (new order),202,20.664
+POST /orders (new order),202,70.884
+POST /orders (new order),202,18.807
+POST /orders (new order),202,21.577
+POST /orders (new order),202,23.54
+POST /orders (new order),202,20.02
+POST /orders (new order),202,15.751
+POST /orders (new order),202,15.721
+POST /orders (new order),202,14.385
+POST /orders (new order),202,14.259
+POST /orders (new order),202,16.072
+POST /orders (new order),202,14.656
+POST /orders (new order),202,16.298
+POST /orders (new order),202,15.201
+POST /orders (new order),202,14.253
+POST /orders (new order),202,15.109
+POST /orders (new order),202,15.797
+POST /orders (new order),202,17.395
+POST /orders (new order),202,20.814
+POST /orders (new order),202,19.787
+POST /orders (new order),202,18.019
+POST /orders (new order),202,19.259
+POST /orders (new order),202,22.065
+POST /orders (new order),202,22.946
+POST /orders (new order),202,18.481
+POST /orders (new order),202,16.921
+POST /orders (new order),202,17.46
+POST /orders (new order),202,33.731
+POST /orders (new order),202,23.89
+POST /orders (new order),202,49.445
+POST /orders (new order),202,36.941
+POST /orders (new order),202,20.293
+POST /orders (new order),202,39.086
+POST /orders (new order),202,38.856
+POST /orders (new order),202,16.216
+POST /orders (new order),202,19.394
+POST /orders (new order),202,33.7
+POST /orders (new order),202,13.739
+POST /orders (new order),202,15.192
+POST /orders (new order),202,21.021
+POST /orders (new order),202,14.564
+POST /orders (new order),202,13.972
+POST /orders (new order),202,14.706
+POST /orders (new order),202,13.909
+POST /orders (new order),202,20.947
+POST /orders (new order),202,24.314
+POST /orders (new order),202,31.635
+POST /orders (new order),202,14.064
+POST /orders (new order),202,17.014
+POST /orders (new order),202,19.048
+POST /orders (new order),202,24.78
+POST /orders (new order),202,14.945
+POST /orders (new order),202,19.662
+POST /orders (new order),202,15.787
+POST /orders (new order),202,19.99
+POST /orders (new order),202,18.396
+POST /orders (new order),202,21.44
+POST /orders (new order),202,25.168
+POST /orders (new order),202,32.705
+POST /orders (new order),202,35.772
+POST /orders (new order),202,51.616
+GET /orders/{id},200,25.438
+GET /orders/{id},200,10.061
+GET /orders/{id},200,24.835
+GET /orders/{id},200,15.633
+GET /orders/{id},200,7.744
+GET /orders/{id},200,28.969
+GET /orders/{id},200,13.175
+GET /orders/{id},200,20.127
+GET /orders/{id},200,16.201
+GET /orders/{id},200,12.941
+GET /orders/{id},200,26.676
+GET /orders/{id},200,12.148
+GET /orders/{id},200,14.034
+GET /orders/{id},200,11.433
+GET /orders/{id},200,9.344
+GET /orders/{id},200,12.897
+GET /orders/{id},200,9.273
+GET /orders/{id},200,7.821
+GET /orders/{id},200,10.789
+GET /orders/{id},200,9.006
+GET /orders/{id},200,10.104
+GET /orders/{id},200,8.086
+GET /orders/{id},200,5.868
+GET /orders/{id},200,7.036
+GET /orders/{id},200,6.697
+GET /orders/{id},200,10.472
+GET /orders/{id},200,9.625
+GET /orders/{id},200,9.617
+GET /orders/{id},200,11.932
+GET /orders/{id},200,9.219
+GET /orders/{id},200,16.78
+GET /orders/{id},200,10.521
+GET /orders/{id},200,9.495
+GET /orders/{id},200,12.907
+GET /orders/{id},200,12.696
+GET /orders/{id},200,18.478
+GET /orders/{id},200,8.015
+GET /orders/{id},200,9.33
+GET /orders/{id},200,8.219
+GET /orders/{id},200,10.262
+GET /orders/{id},200,8.098
+GET /orders/{id},200,10.269
+GET /orders/{id},200,8.585
+GET /orders/{id},200,8.073
+GET /orders/{id},200,8.085
+GET /orders/{id},200,13.262
+GET /orders/{id},200,8.229
+GET /orders/{id},200,8.833
+GET /orders/{id},200,9.002
+GET /orders/{id},200,17.501
+GET /orders/{id},200,11.822
+GET /orders/{id},200,8.519
+GET /orders/{id},200,9.6
+GET /orders/{id},200,9.105
+GET /orders/{id},200,9.927
+GET /orders/{id},200,9.442
+GET /orders/{id},200,8.24
+GET /orders/{id},200,18.492
+GET /orders/{id},200,10.213
+GET /orders/{id},200,12.18
+GET /orders/{id},200,21.795
+GET /orders/{id},200,7.271
+GET /orders/{id},200,6.845
+GET /orders/{id},200,7.217
+GET /orders/{id},200,7.835
+GET /orders/{id},200,8.218
+GET /orders/{id},200,7.657
+GET /orders/{id},200,8.151
+GET /orders/{id},200,9.765
+GET /orders/{id},200,11.49
+GET /orders/{id},200,13.165
+GET /orders/{id},200,9.468
+GET /orders/{id},200,8.695
+GET /orders/{id},200,8.617
+GET /orders/{id},200,8.01
+GET /orders/{id},200,10.517
+GET /orders/{id},200,8.744
+GET /orders/{id},200,9.262
+GET /orders/{id},200,8.138
+GET /orders/{id},200,7.762
+GET /orders/{id},200,9.704
+GET /orders/{id},200,7.767
+GET /orders/{id},200,9.23
+GET /orders/{id},200,7.299
+GET /orders/{id},200,7.909
+GET /orders/{id},200,8.068
+GET /orders/{id},200,8.123
+GET /orders/{id},200,8.187
+GET /orders/{id},200,8.004
+GET /orders/{id},200,8.035
+GET /orders/{id},200,9.168
+GET /orders/{id},200,6.722
+GET /orders/{id},200,10.505
+GET /orders/{id},200,7.729
+GET /orders/{id},200,7.689
+GET /orders/{id},200,10.295
+GET /orders/{id},200,13.743
+GET /orders/{id},200,9.491
+GET /orders/{id},200,10.235
+GET /orders/{id},200,8.387
+GET /orders/{id},200,7.277
+GET /orders/{id},200,8.851
+GET /orders/{id},200,10.198
+GET /orders/{id},200,8.541
+GET /orders/{id},200,7.233
+GET /orders/{id},200,5.806
+GET /orders/{id},200,6.889
+GET /orders/{id},200,5.737
+GET /orders/{id},200,5.697
+GET /orders/{id},200,6.339
+GET /orders/{id},200,5.793
+GET /orders/{id},200,6.361
+GET /orders/{id},200,5.68
+GET /orders/{id},200,6.052
+GET /orders/{id},200,4.877
+GET /orders/{id},200,6.1
+GET /orders/{id},200,5.279
+GET /orders/{id},200,6.975
+GET /orders/{id},200,6.144
+GET /orders/{id},200,9.927
+GET /orders/{id},200,8.203
+GET /orders/{id},200,7.697
+GET /orders/{id},200,7.24
+GET /orders/{id},200,6.503
+GET /orders/{id},200,5.875
+GET /orders/{id},200,8.585
+GET /orders/{id},200,6.45
+GET /orders/{id},200,7.68
+GET /orders/{id},200,6.324
+GET /orders/{id},200,7.013
+GET /orders/{id},200,6.016
+GET /orders/{id},200,6.637
+GET /orders/{id},200,4.953
+GET /orders/{id},200,5.616
+GET /orders/{id},200,5.868
+GET /orders/{id},200,5.685
+GET /orders/{id},200,5.492
+GET /orders/{id},200,6.785
+GET /orders/{id},200,7.48
+GET /orders/{id},200,7.602
+GET /orders/{id},200,9.275
+GET /orders/{id},200,7.155
+GET /orders/{id},200,7.092
+GET /orders/{id},200,6.109
+GET /orders/{id},200,7.313
+GET /orders/{id},200,5.76
+GET /orders/{id},200,6.567
+GET /orders/{id},200,6.133
+GET /orders/{id},200,6.128
+GET /orders/{id},200,5.346
+GET /orders/{id},200,5.739
+GET /orders/{id},200,5.578
+GET /orders/{id},200,6.292
+GET /orders/{id},200,5.037
+GET /orders/{id},200,6.332
+GET /orders/{id},200,5.453
+GET /orders/{id},200,5.163
+GET /orders/{id},200,5.704
+GET /orders/{id},200,8.898
+GET /orders/{id},200,6.233
+GET /orders/{id},200,6.619
+GET /orders/{id},200,6.825
+GET /orders/{id},200,6.496
+GET /orders/{id},200,10.505
+GET /orders/{id},200,11.285
+GET /orders/{id},200,9.051
+GET /orders/{id},200,8.276
+GET /orders/{id},200,6.615
+GET /orders/{id},200,6.655
+GET /orders/{id},200,6.962
+GET /orders/{id},200,6.562
+GET /orders/{id},200,6.445
+GET /orders/{id},200,6.72
+GET /orders/{id},200,6.247
+GET /orders/{id},200,5.325
+GET /orders/{id},200,6.431
+GET /orders/{id},200,6.132
+GET /orders/{id},200,5.13
+GET /orders/{id},200,6.145
+GET /orders/{id},200,6.464
+GET /orders/{id},200,6.135
+GET /orders/{id},200,6.711
+GET /orders/{id},200,6.372
+GET /orders/{id},200,5.655
+GET /orders/{id},200,6.926
+GET /orders/{id},200,7.03
+GET /orders/{id},200,6.232
+GET /orders/{id},200,6.378
+GET /orders/{id},200,7.019
+GET /orders/{id},200,5.439
+GET /orders/{id},200,6.598
+GET /orders/{id},200,6.43
+GET /orders/{id},200,9.343
+GET /orders/{id},200,8.737
+GET /orders/{id},200,7.364
+GET /orders/{id},200,6.479
+GET /orders/{id},200,6.772
+GET /orders/{id},200,6.462
+GET /orders/{id},200,5.797
+GET /orders/{id},200,5.269
+POST /orders (replay),202,8.858
+POST /orders (replay),202,10.557
+POST /orders (replay),202,10.433
+POST /orders (replay),202,9.463
+POST /orders (replay),202,13.01
+POST /orders (replay),202,9.32
+POST /orders (replay),202,9.99
+POST /orders (replay),202,8.906
+POST /orders (replay),202,8.275
+POST /orders (replay),202,7.909
+POST /orders (replay),202,9.802
+POST /orders (replay),202,7.757
+POST /orders (replay),202,8.352
+POST /orders (replay),202,7.696
+POST /orders (replay),202,8.367
+POST /orders (replay),202,7.125
+POST /orders (replay),202,8.511
+POST /orders (replay),202,8.308
+POST /orders (replay),202,7.859
+POST /orders (replay),202,8.304
+POST /orders (replay),202,7.907
+POST /orders (replay),202,7.855
+POST /orders (replay),202,7.524
+POST /orders (replay),202,15.482
+POST /orders (replay),202,14.842
+POST /orders (replay),202,14.757
+POST /orders (replay),202,15.567
+POST /orders (replay),202,15.935
+POST /orders (replay),202,18.08
+POST /orders (replay),202,15.881
+POST /orders (replay),202,14.952
+POST /orders (replay),202,14.345
+POST /orders (replay),202,13.586
+POST /orders (replay),202,14.122
+POST /orders (replay),202,14.718
+POST /orders (replay),202,13.444
+POST /orders (replay),202,14.385
+POST /orders (replay),202,16.544
+POST /orders (replay),202,19.105
+POST /orders (replay),202,18.387
+POST /orders (replay),202,15.67
+POST /orders (replay),202,11.968
+POST /orders (replay),202,11.15
+POST /orders (replay),202,9.813
+POST /orders (replay),202,10.681
+POST /orders (replay),202,10.373
+POST /orders (replay),202,11.545
+POST /orders (replay),202,11.128
+POST /orders (replay),202,9.948
+POST /orders (replay),202,14.08
+POST /orders (replay),202,17.576
+POST /orders (replay),202,19.917
+POST /orders (replay),202,15.126
+POST /orders (replay),202,10.755
+POST /orders (replay),202,8.725
+POST /orders (replay),202,7.408
+POST /orders (replay),202,7.907
+POST /orders (replay),202,7.035
+POST /orders (replay),202,7.495
+POST /orders (replay),202,7.537
+POST /orders (replay),202,6.49
+POST /orders (replay),202,7.213
+POST /orders (replay),202,9.35
+POST /orders (replay),202,6.643
+POST /orders (replay),202,7.775
+POST /orders (replay),202,13.494
+POST /orders (replay),202,14.697
+POST /orders (replay),202,14.861
+POST /orders (replay),202,16.414
+POST /orders (replay),202,17.06
+POST /orders (replay),202,17.218
+POST /orders (replay),202,15.309
+POST /orders (replay),202,16.436
+POST /orders (replay),202,14.717
+POST /orders (replay),202,14.167
+POST /orders (replay),202,14.625
+POST /orders (replay),202,14.159
+POST /orders (replay),202,14.755
+POST /orders (replay),202,15.331
+POST /orders (replay),202,14.711
+POST /orders (replay),202,15.572
+POST /orders (replay),202,14.658
+POST /orders (replay),202,14.907
+POST /orders (replay),202,14.498
+POST /orders (replay),202,15.158
+POST /orders (replay),202,17.474
+POST /orders (replay),202,15.992
+POST /orders (replay),202,13.575
+POST /orders (replay),202,15.384
+POST /orders (replay),202,15.152
+POST /orders (replay),202,13.78
+POST /orders (replay),202,15.499
+POST /orders (replay),202,15.444
+POST /orders (replay),202,16.353
+POST /orders (replay),202,14.492
+POST /orders (replay),202,15.377
+POST /orders (replay),202,15.027
+POST /orders (replay),202,14.827
+POST /orders (replay),202,14.145
+POST /orders (replay),202,14.701
+POST /orders (replay),202,15.707
+POST /orders (replay),202,15.82
+POST /orders (replay),202,14.973
+POST /orders (replay),202,16.173
+POST /orders (replay),202,14.362
+POST /orders (replay),202,14.756
+POST /orders (replay),202,15.304
+POST /orders (replay),202,14.586
+POST /orders (replay),202,14.758
+POST /orders (replay),202,13.828
+POST /orders (replay),202,14.207
+POST /orders (replay),202,13.742
+POST /orders (replay),202,15.737
+POST /orders (replay),202,14.665
+POST /orders (replay),202,13.803
+POST /orders (replay),202,13.885
+POST /orders (replay),202,13.871
+POST /orders (replay),202,16.052
+POST /orders (replay),202,14.233
+POST /orders (replay),202,15.135
+POST /orders (replay),202,14.363
+POST /orders (replay),202,14.75
+POST /orders (replay),202,16.067
+POST /orders (replay),202,16.042
+POST /orders (replay),202,15.028
+POST /orders (replay),202,13.841
+POST /orders (replay),202,11.347
+POST /orders (replay),202,11.731
+POST /orders (replay),202,11.604
+POST /orders (replay),202,11.765
+POST /orders (replay),202,11.081
+POST /orders (replay),202,11.742
+POST /orders (replay),202,11.106
+POST /orders (replay),202,11.685
+POST /orders (replay),202,13.659
+POST /orders (replay),202,10.514
+POST /orders (replay),202,12.264
+POST /orders (replay),202,10.756
+POST /orders (replay),202,12.286
+POST /orders (replay),202,11.65
+POST /orders (replay),202,15.21
+POST /orders (replay),202,14.44
+POST /orders (replay),202,15.672
+POST /orders (replay),202,15.919
+POST /orders (replay),202,16.589
+POST /orders (replay),202,14.477
+POST /orders (replay),202,14.627
+POST /orders (replay),202,14.843
+POST /orders (replay),202,13.475
+POST /orders (replay),202,16.376
+POST /orders (replay),202,15.909
+POST /orders (replay),202,17.677
+POST /orders (replay),202,17.191
+POST /orders (replay),202,15.657
+POST /orders (replay),202,13.721
+POST /orders (replay),202,15.444
+POST /orders (replay),202,15.824
+POST /orders (replay),202,14.49
+POST /orders (replay),202,14.141
+POST /orders (replay),202,13.907
+POST /orders (replay),202,14.688
+POST /orders (replay),202,14.002
+POST /orders (replay),202,14.168
+POST /orders (replay),202,16.011
+POST /orders (replay),202,15.395
+POST /orders (replay),202,16.143
+POST /orders (replay),202,14.213
+POST /orders (replay),202,14.246
+POST /orders (replay),202,14.187
+POST /orders (replay),202,14.171
+POST /orders (replay),202,16.855
+POST /orders (replay),202,14.877
+POST /orders (replay),202,15.341
+POST /orders (replay),202,14.952
+POST /orders (replay),202,14.64
+POST /orders (replay),202,15.185
+POST /orders (replay),202,14.22
+POST /orders (replay),202,14.514
+POST /orders (replay),202,14.373
+POST /orders (replay),202,13.818
+POST /orders (replay),202,14.685
+POST /orders (replay),202,13.769
+POST /orders (replay),202,13.704
+POST /orders (replay),202,13.639
+POST /orders (replay),202,14.371
+POST /orders (replay),202,14.335
+POST /orders (replay),202,15.502
+POST /orders (replay),202,16.178
+POST /orders (replay),202,14.451
+POST /orders (replay),202,13.254
+POST /orders (replay),202,15.084
+POST /orders (replay),202,16.002
+POST /orders (replay),202,17.18
+POST /orders (replay),202,16.283
+POST /orders (replay),202,15.368
+POST /orders (replay),202,13.87
+POST /orders (replay),202,13.382
+POST /orders (replay),202,14.215
+POST /orders (replay),202,19.698
+POST /orders (replay),202,15.116
+GET /catalog,200,9.333
+GET /catalog,200,10.002
+GET /catalog,200,9.427
+GET /catalog,200,12.698
+GET /catalog,200,9.872
+GET /catalog,200,9.543
+GET /catalog,200,8.87
+GET /catalog,200,9.955
+GET /catalog,200,9.249
+GET /catalog,200,10.768
+GET /catalog,200,9.191
+GET /catalog,200,8.607
+GET /catalog,200,9.676
+GET /catalog,200,9.168
+GET /catalog,200,9.366
+GET /catalog,200,9.182
+GET /catalog,200,9.851
+GET /catalog,200,9.882
+GET /catalog,200,10.109
+GET /catalog,200,9.477
+GET /catalog,200,9.223
+GET /catalog,200,9.408
+GET /catalog,200,9.043
+GET /catalog,200,9.458
+GET /catalog,200,8.801
+GET /catalog,200,9.788
+GET /catalog,200,9.543
+GET /catalog,200,9.914
+GET /catalog,200,10.147
+GET /catalog,200,8.791
+GET /catalog,200,9.747
+GET /catalog,200,9.69
+GET /catalog,200,9.355
+GET /catalog,200,10.368
+GET /catalog,200,8.573
+GET /catalog,200,9.504
+GET /catalog,200,9.284
+GET /catalog,200,8.469
+GET /catalog,200,9.771
+GET /catalog,200,8.454
+GET /catalog,200,9.491
+GET /catalog,200,10.118
+GET /catalog,200,9.828
+GET /catalog,200,9.709
+GET /catalog,200,9.207
+GET /catalog,200,8.54
+GET /catalog,200,8.652
+GET /catalog,200,9.715
+GET /catalog,200,9.777
+GET /catalog,200,9.568
+GET /catalog,200,9.271
+GET /catalog,200,8.595
+GET /catalog,200,10.361
+GET /catalog,200,8.955
+GET /catalog,200,12.891
+GET /catalog,200,9.382
+GET /catalog,200,10.575
+GET /catalog,200,11.885
+GET /catalog,200,10.0
+GET /catalog,200,10.057
+GET /catalog,200,10.585
+GET /catalog,200,9.028
+GET /catalog,200,9.511
+GET /catalog,200,9.974
+GET /catalog,200,9.626
+GET /catalog,200,8.651
+GET /catalog,200,9.889
+GET /catalog,200,9.369
+GET /catalog,200,9.288
+GET /catalog,200,9.176
+GET /catalog,200,10.402
+GET /catalog,200,8.65
+GET /catalog,200,10.833
+GET /catalog,200,8.928
+GET /catalog,200,9.099
+GET /catalog,200,9.69
+GET /catalog,200,9.716
+GET /catalog,200,9.589
+GET /catalog,200,8.177
+GET /catalog,200,9.435
+GET /catalog,200,8.392
+GET /catalog,200,9.824
+GET /catalog,200,9.014
+GET /catalog,200,9.878
+GET /catalog,200,10.706
+GET /catalog,200,10.902
+GET /catalog,200,9.694
+GET /catalog,200,9.51
+GET /catalog,200,10.222
+GET /catalog,200,12.662
+GET /catalog,200,10.168
+GET /catalog,200,10.562
+GET /catalog,200,10.077
+GET /catalog,200,10.826
+GET /catalog,200,7.625
+GET /catalog,200,7.527
+GET /catalog,200,6.081
+GET /catalog,200,5.867
+GET /catalog,200,5.059
+GET /catalog,200,6.239
+GET /catalog,200,5.793
+GET /catalog,200,5.295
+GET /catalog,200,5.914
+GET /catalog,200,6.028
+GET /catalog,200,8.851
+GET /catalog,200,10.058
+GET /catalog,200,9.6
+GET /catalog,200,10.701
+GET /catalog,200,9.283
+GET /catalog,200,8.579
+GET /catalog,200,9.444
+GET /catalog,200,9.308
+GET /catalog,200,9.728
+GET /catalog,200,9.612
+GET /catalog,200,11.286
+GET /catalog,200,9.404
+GET /catalog,200,9.312
+GET /catalog,200,9.602
+GET /catalog,200,9.096
+GET /catalog,200,9.816
+GET /catalog,200,9.098
+GET /catalog,200,9.124
+GET /catalog,200,8.967
+GET /catalog,200,9.944
+GET /catalog,200,11.9
+GET /catalog,200,9.444
+GET /catalog,200,8.326
+GET /catalog,200,10.523
+GET /catalog,200,9.335
+GET /catalog,200,8.745
+GET /catalog,200,10.075
+GET /catalog,200,9.201
+GET /catalog,200,9.743
+GET /catalog,200,9.024
+GET /catalog,200,9.795
+GET /catalog,200,9.648
+GET /catalog,200,10.248
+GET /catalog,200,8.882
+GET /catalog,200,9.823
+GET /catalog,200,8.468
+GET /catalog,200,10.64
+GET /catalog,200,11.342
+GET /catalog,200,9.684
+GET /catalog,200,9.536
+GET /catalog,200,10.95
+GET /catalog,200,10.474
+GET /catalog,200,9.883
+GET /catalog,200,9.51
+GET /catalog,200,10.184
+GET /catalog,200,8.847
+GET /catalog,200,10.19
+GET /catalog,200,9.557
+GET /catalog,200,9.28
+GET /catalog,200,10.463
+GET /catalog,200,11.136
+GET /catalog,200,10.329
+GET /catalog,200,8.405
+GET /catalog,200,9.892
+GET /catalog,200,9.058
+GET /catalog,200,9.073
+GET /catalog,200,8.816
+GET /catalog,200,8.763
+GET /catalog,200,10.018
+GET /catalog,200,10.032
+GET /catalog,200,8.945
+GET /catalog,200,10.796
+GET /catalog,200,10.593
+GET /catalog,200,9.248
+GET /catalog,200,10.496
+GET /catalog,200,8.682
+GET /catalog,200,9.691
+GET /catalog,200,9.174
+GET /catalog,200,9.145
+GET /catalog,200,8.674
+GET /catalog,200,8.609
+GET /catalog,200,9.451
+GET /catalog,200,8.909
+GET /catalog,200,9.285
+GET /catalog,200,9.181
+GET /catalog,200,9.012
+GET /catalog,200,9.085
+GET /catalog,200,8.839
+GET /catalog,200,9.375
+GET /catalog,200,8.883
+GET /catalog,200,9.856
+GET /catalog,200,9.365
+GET /catalog,200,9.737
+GET /catalog,200,9.424
+GET /catalog,200,9.537
+GET /catalog,200,9.295
+GET /catalog,200,9.335
+GET /catalog,200,9.15
+GET /catalog,200,9.739
+GET /catalog,200,8.907
+GET /catalog,200,9.417
+GET /catalog,200,9.337
+GET /catalog,200,9.44
+GET /catalog,200,10.019
+GET /catalog,200,9.497
+GET /catalog,200,10.614
+GET /inventory/{sku},200,12.78
+GET /inventory/{sku},200,11.747
+GET /inventory/{sku},200,14.393
+GET /inventory/{sku},200,12.622
+GET /inventory/{sku},200,6.541
+GET /inventory/{sku},200,7.248
+GET /inventory/{sku},200,5.274
+GET /inventory/{sku},200,5.687
+GET /inventory/{sku},200,5.199
+GET /inventory/{sku},200,5.452
+GET /inventory/{sku},200,6.333
+GET /inventory/{sku},200,6.161
+GET /inventory/{sku},200,4.09
+GET /inventory/{sku},200,4.629
+GET /inventory/{sku},200,5.168
+GET /inventory/{sku},200,4.35
+GET /inventory/{sku},200,5.398
+GET /inventory/{sku},200,4.46
+GET /inventory/{sku},200,4.546
+GET /inventory/{sku},200,4.997
+GET /inventory/{sku},200,5.004
+GET /inventory/{sku},200,5.835
+GET /inventory/{sku},200,4.847
+GET /inventory/{sku},200,4.986
+GET /inventory/{sku},200,5.879
+GET /inventory/{sku},200,4.777
+GET /inventory/{sku},200,3.966
+GET /inventory/{sku},200,4.792
+GET /inventory/{sku},200,4.687
+GET /inventory/{sku},200,5.42
+GET /inventory/{sku},200,8.443
+GET /inventory/{sku},200,9.641
+GET /inventory/{sku},200,9.117
+GET /inventory/{sku},200,9.722
+GET /inventory/{sku},200,9.402
+GET /inventory/{sku},200,9.185
+GET /inventory/{sku},200,9.888
+GET /inventory/{sku},200,8.889
+GET /inventory/{sku},200,9.274
+GET /inventory/{sku},200,9.032
+GET /inventory/{sku},200,9.086
+GET /inventory/{sku},200,9.336
+GET /inventory/{sku},200,9.209
+GET /inventory/{sku},200,9.5
+GET /inventory/{sku},200,8.643
+GET /inventory/{sku},200,9.184
+GET /inventory/{sku},200,8.624
+GET /inventory/{sku},200,8.582
+GET /inventory/{sku},200,9.169
+GET /inventory/{sku},200,8.802
+GET /inventory/{sku},200,9.447
+GET /inventory/{sku},200,8.616
+GET /inventory/{sku},200,9.681
+GET /inventory/{sku},200,9.4
+GET /inventory/{sku},200,9.414
+GET /inventory/{sku},200,9.229
+GET /inventory/{sku},200,9.036
+GET /inventory/{sku},200,9.853
+GET /inventory/{sku},200,9.631
+GET /inventory/{sku},200,8.617
+GET /inventory/{sku},200,10.195
+GET /inventory/{sku},200,9.331
+GET /inventory/{sku},200,9.494
+GET /inventory/{sku},200,9.744
+GET /inventory/{sku},200,8.469
+GET /inventory/{sku},200,9.984
+GET /inventory/{sku},200,9.141
+GET /inventory/{sku},200,10.203
+GET /inventory/{sku},200,10.394
+GET /inventory/{sku},200,11.022
+GET /inventory/{sku},200,9.9
+GET /inventory/{sku},200,9.897
+GET /inventory/{sku},200,9.212
+GET /inventory/{sku},200,10.705
+GET /inventory/{sku},200,9.126
+GET /inventory/{sku},200,13.149
+GET /inventory/{sku},200,10.906
+GET /inventory/{sku},200,10.362
+GET /inventory/{sku},200,9.63
+GET /inventory/{sku},200,10.121
+GET /inventory/{sku},200,9.986
+GET /inventory/{sku},200,11.488
+GET /inventory/{sku},200,9.81
+GET /inventory/{sku},200,10.214
+GET /inventory/{sku},200,9.392
+GET /inventory/{sku},200,9.797
+GET /inventory/{sku},200,9.022
+GET /inventory/{sku},200,8.941
+GET /inventory/{sku},200,10.434
+GET /inventory/{sku},200,10.056
+GET /inventory/{sku},200,10.629
+GET /inventory/{sku},200,9.871
+GET /inventory/{sku},200,9.088
+GET /inventory/{sku},200,9.069
+GET /inventory/{sku},200,10.978
+GET /inventory/{sku},200,10.358
+GET /inventory/{sku},200,10.362
+GET /inventory/{sku},200,9.263
+GET /inventory/{sku},200,9.676
+GET /inventory/{sku},200,8.417
+GET /inventory/{sku},200,10.587
+GET /inventory/{sku},200,9.436
+GET /inventory/{sku},200,12.054
+GET /inventory/{sku},200,10.106
+GET /inventory/{sku},200,10.646
+GET /inventory/{sku},200,9.81
+GET /inventory/{sku},200,9.539
+GET /inventory/{sku},200,10.014
+GET /inventory/{sku},200,10.333
+GET /inventory/{sku},200,9.686
+GET /inventory/{sku},200,11.544
+GET /inventory/{sku},200,11.207
+GET /inventory/{sku},200,12.379
+GET /inventory/{sku},200,10.332
+GET /inventory/{sku},200,9.906
+GET /inventory/{sku},200,7.524
+GET /inventory/{sku},200,7.031
+GET /inventory/{sku},200,5.89
+GET /inventory/{sku},200,5.566
+GET /inventory/{sku},200,5.324
+GET /inventory/{sku},200,6.148
+GET /inventory/{sku},200,4.484
+GET /inventory/{sku},200,4.973
+GET /inventory/{sku},200,4.125
+GET /inventory/{sku},200,4.376
+GET /inventory/{sku},200,4.89
+GET /inventory/{sku},200,4.834
+GET /inventory/{sku},200,4.404
+GET /inventory/{sku},200,4.274
+GET /inventory/{sku},200,5.543
+GET /inventory/{sku},200,4.293
+GET /inventory/{sku},200,8.902
+GET /inventory/{sku},200,10.368
+GET /inventory/{sku},200,9.993
+GET /inventory/{sku},200,10.985
+GET /inventory/{sku},200,8.561
+GET /inventory/{sku},200,10.518
+GET /inventory/{sku},200,9.284
+GET /inventory/{sku},200,8.783
+GET /inventory/{sku},200,10.121
+GET /inventory/{sku},200,8.97
+GET /inventory/{sku},200,9.547
+GET /inventory/{sku},200,9.423
+GET /inventory/{sku},200,10.287
+GET /inventory/{sku},200,8.501
+GET /inventory/{sku},200,10.069
+GET /inventory/{sku},200,10.165
+GET /inventory/{sku},200,10.754
+GET /inventory/{sku},200,10.897
+GET /inventory/{sku},200,12.977
+GET /inventory/{sku},200,9.504
+GET /inventory/{sku},200,10.045
+GET /inventory/{sku},200,8.792
+GET /inventory/{sku},200,9.757
+GET /inventory/{sku},200,9.03
+GET /inventory/{sku},200,9.253
+GET /inventory/{sku},200,9.136
+GET /inventory/{sku},200,10.377
+GET /inventory/{sku},200,8.934
+GET /inventory/{sku},200,9.439
+GET /inventory/{sku},200,8.459
+GET /inventory/{sku},200,8.673
+GET /inventory/{sku},200,9.222
+GET /inventory/{sku},200,9.655
+GET /inventory/{sku},200,8.908
+GET /inventory/{sku},200,9.707
+GET /inventory/{sku},200,10.69
+GET /inventory/{sku},200,10.766
+GET /inventory/{sku},200,11.276
+GET /inventory/{sku},200,11.683
+GET /inventory/{sku},200,14.07
+GET /inventory/{sku},200,9.751
+GET /inventory/{sku},200,9.351
+GET /inventory/{sku},200,8.222
+GET /inventory/{sku},200,6.841
+GET /inventory/{sku},200,6.154
+GET /inventory/{sku},200,7.38
+GET /inventory/{sku},200,5.18
+GET /inventory/{sku},200,5.152
+GET /inventory/{sku},200,4.695
+GET /inventory/{sku},200,5.155
+GET /inventory/{sku},200,4.965
+GET /inventory/{sku},200,5.611
+GET /inventory/{sku},200,4.672
+GET /inventory/{sku},200,5.083
+GET /inventory/{sku},200,6.131
+GET /inventory/{sku},200,6.723
+GET /inventory/{sku},200,5.257
+GET /inventory/{sku},200,5.954
+GET /inventory/{sku},200,5.803
+GET /inventory/{sku},200,5.99
+GET /inventory/{sku},200,4.831
+GET /inventory/{sku},200,5.672
+GET /inventory/{sku},200,11.938
+GET /inventory/{sku},200,11.174
+GET /inventory/{sku},200,12.21
+GET /inventory/{sku},200,13.934
+GET /inventory/{sku},200,12.147
+GET /inventory/{sku},200,10.041
+GET /inventory/{sku},200,7.592
