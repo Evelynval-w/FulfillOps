@@ -7,3 +7,5 @@ venv/
 .ruff_cache/
 *.log
 
+# Local Kubernetes secrets
+infra/k8s/secret.yaml
