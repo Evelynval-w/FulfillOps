@@ -1,0 +1,88 @@
+FULFILLOPS - POSTGRESQL PERSISTENCE TEST
+Date: 2026-11-13
+
+1. PRE-RESTART STATE
+
+Original PostgreSQL pod:
+postgres-65967fc755-mbl7p
+
+PVC:
+postgres-data
+
+Persistent volume:
+pvc-e4906d6c-24a6-40f9-8aff-5df1ed643410
+
+PVC status: Bound
+Capacity: 2Gi
+Access mode: RWO
+
+Database readiness:
+pg_isready: accepting connections
+
+Database baseline:
+orders: 4
+jobs: 4
+
+Inventory baseline:
+KIT-100: 7
+PACK-300: 0
+PART-200: 12
+
+All jobs were in state 'done' before restart:
+done: 4
+
+
+2. RESTART PROCEDURE
+
+Deleted only the PostgreSQL Pod:
+postgres-65967fc755-mbl7p
+
+The PVC and persistent volume were not deleted.
+
+Kubernetes created replacement pod:
+postgres-65967fc755-njkts
+
+Replacement pod reached Ready condition.
+
+
+3. POST-RESTART VERIFICATION
+
+Database readiness:
+pg_isready: accepting connections
+
+Database after restart:
+orders: 4
+jobs: 4
+
+Inventory after restart:
+KIT-100: 7
+PACK-300: 0
+PART-200: 12
+
+
+4. COMPARISON
+
+Orders:     4 -> 4
+Jobs:       4 -> 4
+KIT-100:    7 -> 7
+PACK-300:   0 -> 0
+PART-200:  12 -> 12
+
+All recorded database counts and inventory quantities remained unchanged.
+
+
+5. FINAL CLUSTER HEALTH
+
+API pods: 2/2 Running
+Worker pods: 2/2 Running
+PostgreSQL pod: 1/1 Running
+PVC postgres-data: Bound
+Argo CD application fulfillops:
+Sync status: Synced
+Health status: Healthy
+
+
+RESULT: PASS
+
+PostgreSQL was recreated using its existing persistent storage.
+Database records and inventory values survived the Pod restart.
