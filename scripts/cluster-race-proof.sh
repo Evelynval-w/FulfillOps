@@ -3,12 +3,13 @@
 #   1. 8 simultaneous POSTs with ONE key, spread over the two API pods -> one order, stock down once
 #   2. 8 simultaneous POSTs with DIFFERENT keys for the remaining stock -> only the stock available is sold
 #   3. delete one API pod, wait for the replacement, replay the key -> same order, stock unchanged
-# It consumes PACK-300 stock, so it refuses to run unless the stock is still the seed value (5).
+# It consumes PACK-300 stock and needs at least 2 units; it computes what to expect from the starting stock.
 # It never resets or deletes data. Run it on a freshly deployed lab cluster only.
 set -euo pipefail
 
 NS=${NS:-fulfillops}
 SKU=PACK-300
+PORT_BASE=${PORT_BASE:-28081}   # local ports for the three port-forwards, change if they are taken
 KEY="race-proof-$(date +%s)"
 OUT="docs/evidence/cluster-race-$(date -u +%Y%m%dT%H%M%SZ).txt"
 TMP=$(mktemp -d)
@@ -43,25 +44,29 @@ read -r P1 P2 <<<"$(pods)"
 [ -n "${P2:-}" ] || { echo "need two API pods, found: $(pods)"; exit 1; }
 echo "API pods: $P1 $P2"
 STOCK=$(psql_q "select available from products where sku='$SKU'")
-[ "$STOCK" = "5" ] || { echo "stock of $SKU is $STOCK, not the seed value 5: use a freshly deployed lab database"; exit 1; }
-forward "$P1" 18081; forward "$P2" 18082
+[ "$STOCK" -ge 2 ] || { echo "stock of $SKU is $STOCK, need at least 2: the lab database has been used up"; exit 1; }
+AFTER1=$((STOCK - 2))                       # after the same-key order of quantity 2
+ACCEPT=$(( AFTER1 < 8 ? AFTER1 : 8 ))       # competing orders of quantity 1 that can succeed
+REFUSE=$((8 - ACCEPT))
+echo "starting stock of $SKU: $STOCK (expected: $AFTER1 after step 1, $ACCEPT accepted and $REFUSE refused in step 2, 0 or $((AFTER1 - ACCEPT)) left)"
+forward "$P1" "$PORT_BASE"; forward "$P2" "$((PORT_BASE + 1))"
 
 echo; echo "== 1. eight simultaneous POSTs, same key, same payload (qty 2), four per pod"
 for i in 1 2 3 4 5 6 7 8; do
-  port=$((18081 + i % 2)); post "$port" "$KEY" 2 "$TMP/same$i" & 
+  port=$((PORT_BASE + i % 2)); post "$port" "$KEY" 2 "$TMP/same$i" & 
 done; wait
 for i in 1 2 3 4 5 6 7 8; do echo "request $i: HTTP $(cat "$TMP/same$i.code") order_id=$(field "$TMP/same$i" order_id)"; done
 echo "distinct order ids returned: $(for i in 1 2 3 4 5 6 7 8; do field "$TMP/same$i" order_id; done | sort -u | wc -l)"
 echo "orders with this key in DB: $(psql_q "select count(*) from orders where idempotency_key='$KEY'")"
-echo "stock $SKU: $(psql_q "select available from products where sku='$SKU'") (expected 3)"
+echo "stock $SKU: $(psql_q "select available from products where sku='$SKU'") (expected $AFTER1)"
 
-echo; echo "== 2. eight simultaneous POSTs, different keys (qty 1), for the 3 units left"
+echo; echo "== 2. eight simultaneous POSTs, different keys (qty 1), for the units left"
 for i in 1 2 3 4 5 6 7 8; do
-  port=$((18081 + i % 2)); post "$port" "$KEY-c$i" 1 "$TMP/c$i" &
+  port=$((PORT_BASE + i % 2)); post "$port" "$KEY-c$i" 1 "$TMP/c$i" &
 done; wait
 for i in 1 2 3 4 5 6 7 8; do echo "request $i: HTTP $(cat "$TMP/c$i.code") $(field "$TMP/c$i" error_code)"; done
-echo "accepted: $(grep -l '^202$' "$TMP"/c?.code | wc -l) (expected 3), refused: $(grep -L '^202$' "$TMP"/c?.code | wc -l) (expected 5)"
-echo "stock $SKU: $(psql_q "select available from products where sku='$SKU'") (expected 0, never negative)"
+echo "accepted: $(grep -l '^202$' "$TMP"/c?.code | wc -l) (expected $ACCEPT), refused: $(grep -L '^202$' "$TMP"/c?.code | wc -l) (expected $REFUSE)"
+echo "stock $SKU: $(psql_q "select available from products where sku='$SKU'") (expected $((AFTER1 - ACCEPT)), never negative)"
 
 echo; echo "== 3. restart one API pod, then replay the same key"
 OID=$(field "$TMP/same1" order_id)
@@ -69,8 +74,8 @@ kubectl -n "$NS" delete pod "$P1" --wait=true
 kubectl -n "$NS" wait --for=condition=Ready pod -l app=fulfillops-api --timeout=120s
 NEW=$(pods | tr ' ' '\n' | grep -v "^$P2$" | head -1)
 echo "replacement pod: $NEW"
-forward "$NEW" 18083
-post 18083 "$KEY" 2 "$TMP/replay"
+forward "$NEW" "$((PORT_BASE + 2))"
+post "$((PORT_BASE + 2))" "$KEY" 2 "$TMP/replay"
 echo "replay: HTTP $(cat "$TMP/replay.code") order_id=$(field "$TMP/replay" order_id) (first order was $OID)"
 echo "orders with this key in DB: $(psql_q "select count(*) from orders where idempotency_key='$KEY'")"
 echo "stock $SKU: $(psql_q "select available from products where sku='$SKU'") (still 0)"
