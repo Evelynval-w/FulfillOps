@@ -21,6 +21,8 @@ spec:
     metadata:
       labels:
         app: fulfillops-api
+      annotations:
+        fulfillops.openai.com/rollout-evidence: "20261113"
     spec:
       containers:
         - name: api
