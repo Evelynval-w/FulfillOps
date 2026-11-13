@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: fulfillops
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Evelynval-w/FulfillOps.git
+    targetRevision: main
+    path: infra/k8s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: fulfillops
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true

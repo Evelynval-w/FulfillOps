@@ -1,0 +1,20 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fulfillops-config
+  namespace: fulfillops
+data:
+  POSTGRES_DB: fulfillops
+  POSTGRES_USER: fulfillops
+  APP_ENV: production
+  PORT: "8080"
+  POOL_SIZE: "20"
+  WORKER_POOL_SIZE: "3"
+  POLL_INTERVAL_S: "0.5"
+  LEASE_SECONDS: "10"
+  BACKOFF_BASE_S: "2"
+  BACKOFF_CAP_S: "30"
+  PROCESSING_SECONDS: "0.5"
+  MIGRATIONS_DIR: db/migrations
+  FAIL_READINESS: "false"
