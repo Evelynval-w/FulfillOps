@@ -181,3 +181,26 @@ Compose, the CI workflow, the Kubernetes manifests in `infra/k8s` and the Argo C
 
 Three people, three areas: the API and stock reservation (Makuo), the worker and reliability
 (Saad), and Docker, CI and Kubernetes with Argo CD (Tony).
+
+## Individual notes
+
+Each person adds their own subsection here: what they implemented, what they reviewed, and what
+they would improve next. AI assistance is listed per person in [`docs/assistance-log.md`](docs/assistance-log.md).
+
+### Makuo
+
+**What I implemented.**
+- The API and the order transaction in `src/fulfillops/api/`: validation with exact status and error codes, atomic stock reservation, and idempotency across replicas with a unique key and a payload hash.
+- The schema and migrations in `db/migrations/`, and ADR-001 (decisions, invariants, limitations).
+- My own tests: unit and API tests, the two race tests (different keys against identical keys), the integration tests with real worker processes (`tests/test_integration.py`), and the deliberate-bug demo that goes red and then green.
+- Graceful shutdown on SIGTERM, the 413 decision for bodies over 16 KiB, the guarded reset script `scripts/reset_test_data.py`, and the Postman collection.
+- The README, `docs/architecture.md`, and the cluster race-proof script `scripts/cluster-race-proof.sh`.
+
+**What I reviewed.** Saad's worker, drill and documentation pull requests (#9, #10, #11, #13, #17), and Tony's Docker, Kubernetes, Argo CD and rollout pull requests (#16, #19, #22). On Tony's work I asked for the explicit rolling-update strategy, `Recreate` for PostgreSQL, Argo CD tracking `main`, and fixes to the race script (waiting only for the POST processes, asserting results, keeping the executable bit).
+
+**What I would improve next.**
+- Idempotency keys never expire: add a retention window with a cleanup job.
+- A rejected order (409) frees its key, so a retry can succeed later: store the rejected result if strict replay is needed.
+- No authentication or rate limiting: add API keys or OAuth and a gateway limit.
+- A `failed` order keeps its stock reserved: add an operator action with an audit trail to retry or release it.
+- Stock safety depends on every code path using the conditional update: move every stock change into one function covered by the race tests.
