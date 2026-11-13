@@ -1,0 +1,14 @@
+orders by status:
+completed|2
+failed|1
+jobs by state (count|attempts):
+dead|1|5
+done|2|3
+orders without a job:
+0
+completed orders whose job is not done:
+0
+stock:
+KIT-100|7
+PACK-300|5
+PART-200|9

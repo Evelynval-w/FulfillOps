@@ -1,0 +1,6 @@
+
+fulfillops_orders_created_total 2.0
+fulfillops_orders_failed_total 1.0
+fulfillops_worker_retries_total 5.0
+
+
