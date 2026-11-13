@@ -1,0 +1,50 @@
+== 2026-11-13T20:27:42Z cluster race proof, key=race-proof-1794601662
+API pods: fulfillops-api-7757cf4f6b-rh9dq fulfillops-api-7757cf4f6b-xkf6f
+starting stock of PACK-300: 4 -> 2 after step 1 -> 0 after step 2 (2 accepted, 6 refused)
+
+== 1. eight simultaneous POSTs, same key, same payload (qty 2), spread over both pods
+request 1: HTTP 202 order_id=dc142662-10b9-4082-b94b-0c09b76641d4
+request 2: HTTP 202 order_id=dc142662-10b9-4082-b94b-0c09b76641d4
+request 3: HTTP 202 order_id=dc142662-10b9-4082-b94b-0c09b76641d4
+request 4: HTTP 202 order_id=dc142662-10b9-4082-b94b-0c09b76641d4
+request 5: HTTP 202 order_id=dc142662-10b9-4082-b94b-0c09b76641d4
+request 6: HTTP 202 order_id=dc142662-10b9-4082-b94b-0c09b76641d4
+request 7: HTTP 202 order_id=dc142662-10b9-4082-b94b-0c09b76641d4
+request 8: HTTP 202 order_id=dc142662-10b9-4082-b94b-0c09b76641d4
+PASS  HTTP 202 answers: 8
+PASS  distinct order ids returned: 1
+PASS  orders with this key in the database: 1
+PASS  stock of PACK-300 after step 1: 2
+
+== 2. eight simultaneous POSTs, different keys (qty 1), for the units left
+request 1: HTTP 409 OUT_OF_STOCK
+request 2: HTTP 202 -
+request 3: HTTP 409 OUT_OF_STOCK
+request 4: HTTP 409 OUT_OF_STOCK
+request 5: HTTP 409 OUT_OF_STOCK
+request 6: HTTP 202 -
+request 7: HTTP 409 OUT_OF_STOCK
+request 8: HTTP 409 OUT_OF_STOCK
+PASS  accepted (202): 2
+PASS  refused (409): 6
+PASS  stock of PACK-300 after step 2 (never negative): 0
+
+== 3. restart one API pod, then replay the same key
+pod "fulfillops-api-7757cf4f6b-rh9dq" deleted from fulfillops namespace
+pod/fulfillops-api-7757cf4f6b-8tbxj condition met
+pod/fulfillops-api-7757cf4f6b-xkf6f condition met
+replacement pod: fulfillops-api-7757cf4f6b-8tbxj
+PASS  replay HTTP status: 202
+PASS  replay returns the first order id: dc142662-10b9-4082-b94b-0c09b76641d4
+PASS  orders with this key in the database: 1
+PASS  stock of PACK-300 unchanged by the replay: 0
+
+== rows for the report
+dc142662-10b9-4082-b94b-0c09b76641d4|completed|race-proof-1794601662
+296152c7-6a95-4f71-a7a2-9f5300c914bf|completed|race-proof-1794601662-c2
+af8b0761-c666-4d30-8c96-ebf664ef87a3|completed|race-proof-1794601662-c6
+
+== RESULT: all checks passed, evidence saved to docs/evidence/cluster-race-20261113T202742Z.txt
+./scripts/cluster-race-proof.sh: line 19: 13636 Terminated: 15          kubectl -n "$NS" port-forward "pod/$1" "$2:8080" > /dev/null 2>&1
+./scripts/cluster-race-proof.sh: line 19: 13657 Terminated: 15          kubectl -n "$NS" port-forward "pod/$1" "$2:8080" > /dev/null 2>&1
+./scripts/cluster-race-proof.sh: line 19: 13914 Terminated: 15          kubectl -n "$NS" port-forward "pod/$1" "$2:8080" > /dev/null 2>&1
