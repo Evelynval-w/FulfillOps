@@ -22,7 +22,7 @@ spec:
       labels:
         app: fulfillops-api
       annotations:
-        fulfillops.openai.com/rollout-evidence: "20261113"
+        fulfillops.dev/rollout-evidence: "20261113-rollout-2"
     spec:
       containers:
         - name: api
