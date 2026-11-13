@@ -1,0 +1,18 @@
+WARNING: test orders consume stock. Run on an isolated TEST deployment; never production.
+PASS Liveness endpoint
+PASS Readiness endpoint
+PASS Catalog and fixed prices
+PASS Unknown order returns 404
+PASS Missing Idempotency-Key returns 400
+PASS Invalid item quantity returns 422
+PASS Inventory reading
+PASS Create order and idempotent retry
+PASS Conflicting idempotency payload rejected
+PASS Asynchronous worker eventually completes
+PASS Inventory reduced exactly once
+PASS Prometheus metrics exposed
+PASS Concurrent inventory reservations are atomic
+PASS Eight concurrent identical-key requests reserve once
+PASS Duplicate SKU lines aggregate and bill correctly
+
+RESULT: 15 passed / 0 failed / 0 skipped

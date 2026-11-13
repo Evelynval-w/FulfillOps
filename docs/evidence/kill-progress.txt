@@ -1,0 +1,12 @@
+10:20:15  processing|claimed|1|worker-1
+10:20:18  processing|claimed|1|worker-1
+10:20:20  processing|claimed|2|worker-2
+10:20:23  processing|claimed|2|worker-2
+10:20:25  completed|done|2|
+10:20:28  completed|done|2|
+10:20:30  completed|done|2|
+10:20:33  completed|done|2|
+10:20:35  completed|done|2|
+10:20:37  completed|done|2|
+10:20:40  completed|done|2|
+10:20:42  completed|done|2|

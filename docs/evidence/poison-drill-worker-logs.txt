@@ -1,0 +1,12 @@
+worker-2-1  | 2026-11-13T09:40:03.502929809Z 2026-11-13 09:40:03,502 INFO fulfillops.worker worker=worker-2 started
+worker-2-1  | 2026-11-13T09:41:13.687365984Z 2026-11-13 09:41:13,686 INFO fulfillops.worker worker=worker-2 order=f5306a81-a2ee-48df-9070-038a7b247b19 job=2 attempt=1/5 claimed
+worker-1-1  | 2026-11-13T09:40:03.637614757Z 2026-11-13 09:40:03,637 INFO fulfillops.worker worker=worker-1 started
+worker-1-1  | 2026-11-13T09:41:15.810618314Z 2026-11-13 09:41:15,809 INFO fulfillops.worker worker=worker-1 order=f5306a81-a2ee-48df-9070-038a7b247b19 job=2 attempt=2/5 claimed
+worker-2-1  | 2026-11-13T09:41:13.691090340Z 2026-11-13 09:41:13,690 WARNING fulfillops.worker worker=worker-2 order=f5306a81-a2ee-48df-9070-038a7b247b19 job=2 attempt=1/5 failed (PoisonJobError) -> retry in 2.1s
+worker-2-1  | 2026-11-13T09:41:20.797385900Z 2026-11-13 09:41:20,795 INFO fulfillops.worker worker=worker-2 order=f5306a81-a2ee-48df-9070-038a7b247b19 job=2 attempt=3/5 claimed
+worker-2-1  | 2026-11-13T09:41:20.819444104Z 2026-11-13 09:41:20,818 WARNING fulfillops.worker worker=worker-2 order=f5306a81-a2ee-48df-9070-038a7b247b19 job=2 attempt=3/5 failed (PoisonJobError) -> retry in 7.1s
+worker-2-1  | 2026-11-13T09:41:27.972208342Z 2026-11-13 09:41:27,970 INFO fulfillops.worker worker=worker-2 order=f5306a81-a2ee-48df-9070-038a7b247b19 job=2 attempt=4/5 claimed
+worker-2-1  | 2026-11-13T09:41:27.984600024Z 2026-11-13 09:41:27,983 WARNING fulfillops.worker worker=worker-2 order=f5306a81-a2ee-48df-9070-038a7b247b19 job=2 attempt=4/5 failed (PoisonJobError) -> retry in 18.8s
+worker-2-1  | 2026-11-13T09:41:46.765815060Z 2026-11-13 09:41:46,765 INFO fulfillops.worker worker=worker-2 order=f5306a81-a2ee-48df-9070-038a7b247b19 job=2 attempt=5/5 claimed
+worker-2-1  | 2026-11-13T09:41:46.771943791Z 2026-11-13 09:41:46,771 WARNING fulfillops.worker worker=worker-2 order=f5306a81-a2ee-48df-9070-038a7b247b19 job=2 attempt=5/5 failed (PoisonJobError) -> dead
+worker-1-1  | 2026-11-13T09:41:15.818822513Z 2026-11-13 09:41:15,818 WARNING fulfillops.worker worker=worker-1 order=f5306a81-a2ee-48df-9070-038a7b247b19 job=2 attempt=2/5 failed (PoisonJobError) -> retry in 4.6s
