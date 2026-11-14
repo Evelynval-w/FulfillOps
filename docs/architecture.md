@@ -15,7 +15,7 @@ flowchart LR
     A2 -->|one transaction| DB
     W1[Worker 1] -->|claim, complete| DB
     W2[Worker 2] -->|claim, complete| DB
-    P[Prometheus] -->|scrape /metrics| A1
+    P[Prometheus or any scraper<br/>not deployed in our lab] -->|scrape /metrics| A1
     P -->|scrape /metrics| A2
 ```
 
@@ -89,7 +89,7 @@ metrics port. The targets (99.5 % success, p95 under 300 ms) are in ADR-003.
 |-------------|-----|
 | Local | `docker compose up -d --build`: `db`, `api-1`, `api-2`, `worker-1`, `worker-2` |
 | CI | GitHub Actions: lint, tests, image build, SBOM, vulnerability scan |
-| Cluster | kind with two API replicas and two worker pods, reconciled by Argo CD from `infra/` (in progress) |
+| Cluster | kind with 2 API replicas, 2 worker pods and PostgreSQL on a persistent volume, reconciled by Argo CD from `infra/k8s` on `main` |
 
 ## 8. Security basics
 
