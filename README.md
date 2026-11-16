@@ -204,3 +204,21 @@ they would improve next. AI assistance is listed per person in [`docs/assistance
 - No authentication or rate limiting: add API keys or OAuth and a gateway limit.
 - A `failed` order keeps its stock reserved: add an operator action with an audit trail to retry or release it.
 - Stock safety depends on every code path using the conditional update: move every stock change into one function covered by the race tests.
+
+### Saad
+
+**What I implemented.**
+- The durable worker in `src/fulfillops/worker/`: atomic claim with `FOR UPDATE SKIP LOCKED`, a 10 s lease, a guarded completion (job id, state, worker id and attempt number), bounded retries with backoff and jitter, a dead-letter state that keeps the stock reserved, graceful SIGTERM, and a startup backoff when the schema is not ready.
+- The worker tests in `tests/test_worker.py` and the red-to-green demo of the completion guard (`scripts/demo-worker-bug.*`).
+- `scripts/measure_p95.py` (200 samples per endpoint, exact p95 with a server-histogram cross-check) and its evidence, ADR-003 (reliability and observability) and the threat model.
+- The worker-kill and poison-job drills on Docker Compose with logs, metrics, SQL integrity checks and screenshots in `docs/evidence/`, and the incident postmortem.
+- `scripts/drill-k8s-kill.sh` for the cluster. It is on `main`, but it was not run before the freeze, so the cluster drill is planned.
+
+**What I reviewed.** Maku's ADR-001 decisions D4 and D7 against the worker (three wording suggestions, applied in `500908e`), and Tony's Dockerfile and Compose file, on which I ran my drills.
+
+**What I would improve next.**
+- A lease heartbeat, so a slow job is not taken over while it is still running.
+- `LISTEN/NOTIFY` instead of polling every 0.5 s.
+- An alert when a job reaches `dead`, and an audited operator action to retry or release a failed order.
+- Counters kept in a small summary table, not table scans at every scrape.
+- Run the worker kill and poison drills on the Kubernetes cluster, and a load test there instead of one sequential client.
