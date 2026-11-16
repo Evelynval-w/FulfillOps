@@ -1,16 +1,15 @@
 # Incident postmortem (blameless)
 
-Status: Incident 1 and 1b are written from saved evidence. Incident 2 is waiting for the rollout
-evidence from Tony (C). Brackets `[ ]` mark values that are not yet known; no number or time in
-this file is written without a log, metric or query result behind it.
+Status: Incident 1 and 1b are written from saved evidence. Incident 2 says what was and was not captured.
+No number or time in this file is written without a log, metric or query result behind it.
 
 A postmortem explains what happened and how the system and the team can do better. It does not look
 for a person to blame. All incidents below are controlled failures, injected on purpose in our
 isolated test environments.
 
 **Where Incident 1 and 1b ran:** Docker Compose on one Windows laptop (PostgreSQL, 2 API containers,
-2 worker containers, image built from this repository). A repeat on the Kubernetes cluster is
-planned for the same evening; if it is done, its files are `docs/evidence/k8s-kill-*.txt`.
+2 worker containers, image built from this repository). A repeat on the Kubernetes cluster (script
+`scripts/drill-k8s-kill.sh`, on `main`) was not run before the code freeze, so it is planned, not done.
 
 ## Incident 1: a worker is killed while processing a committed order (owner: Saad (B))
 
@@ -112,35 +111,16 @@ After the drill (job dead after 5 attempts, 2 created, 1 failed, 5 retries):
 
 ## Incident 2: failed API rolling release (owner: Tony (C), written with Saad (B))
 
-**Summary.** [Git commit `[bad sha]` changed the API Deployment to [an image that cannot be pulled /
-a revision whose `/health/ready` returns 503]. Argo CD synced it. The new pods never became ready, the
-rollout stopped, and the old pods kept serving. `git revert` of `[bad sha]` (commit `[after sha]`)
-restored the last good revision `[before sha]`.]
-
-**Impact.** [Requests failed during the rollout: from the probe CSV, `[n]` of `[total]`, expected 0.
-Orders lost: `[0]`.]
-
-**Timeline (UTC).**
-| Time | Event | Source |
-|------|-------|--------|
-| [hh:mm:ss] | Bad revision pushed (`[bad sha]`) | Git log |
-| [hh:mm:ss] | Argo CD syncs, new pods `[ImagePullBackOff / 0/1 Ready]` | events log, screenshot |
-| [hh:mm:ss] | Rollout stops; old pods still serving | `kubectl rollout status` |
-| [hh:mm:ss] | Recovery pushed (`[after sha]`) | Git log |
-| [hh:mm:ss] | Argo CD Synced and Healthy again | screenshot |
-
-**Detection.** [Pods not ready, Argo CD Progressing or Degraded, `kubectl rollout status` timing out.]
-
-**Root cause.** [A deliberately broken revision.]
-
-**Recovery and rationale.** [Rollback by Git revert, or fix-forward: say which one was used and why.
-A revert restores a known-good revision fastest when the cause is unknown; fix-forward is better
-when the cause is known and small, or when a rollback cannot work, for example after an
-irreversible database change.]
-
-**Data integrity.** [Orders before and after, stock, both test orders `completed`.]
-
-**What went well, what went badly, action items.** [From the real evidence.]
+**Status: evidence not committed before submission; planned.** Tony (C) demonstrated a failed rollout on
+the kind cluster: a revision that used an invalid image (`fulfillops:bad-test`) left its new pods in
+`ImagePullBackOff`, and recovery was a new Git commit, after which Argo CD returned to Synced and Healthy.
+The resulting state is shown in Tony's section of the report (pods, ReplicaSets, Argo CD). The API
+Deployment uses `maxUnavailable: 0` and `maxSurge: 1`, so Kubernetes does not remove an old pod until a
+new one is ready; however, no availability probe was recorded during the failure, so no claim of
+uninterrupted service is made. The 30 s probe CSV, the rollout history, the Argo CD screenshots of the
+failure and the Git revisions before and after were not committed, so this postmortem gives no timeline
+or numbers for it. Planned: repeat the drill with the probe running and commit the files under
+`docs/evidence/`.
 
 ## Evidence index
 | Item | File |
@@ -158,10 +138,10 @@ irreversible database change.]
 | Incident 1b, SQL integrity | `docs/evidence/poison-integrity.txt` |
 | Incident 1b, screenshots | `docs/evidence/screenshots/poison-before.png`, `docs/evidence/screenshots/poison-after.png` |
 | Latency (p95), local run | `docs/evidence/p95-20261112T022346Z.json`, `docs/evidence/p95-20261112T022346Z-samples.csv` |
-| Latency (p95), Compose containers | [file names after the run] |
+| Latency (p95), Compose containers | not run (planned) |
 | Kubernetes kill drill (planned) | `docs/evidence/k8s-kill-*.txt` |
-| Incident 2, 30 s rollout probe CSV | [Tony (C)] |
-| Incident 2, Argo CD screenshots, rollout history, Git revisions | [Tony (C)] |
+| Incident 2, 30 s rollout probe CSV | not committed (planned) |
+| Incident 2, Argo CD screenshots, rollout history, Git revisions | not committed (planned) |
 
 ## Queries for the data-integrity checks
 ```sql
