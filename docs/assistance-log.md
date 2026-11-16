@@ -22,6 +22,10 @@ says what the person did or checked personally; it must be true.
 | 2026-11-12 | Makuo (A) | Claude | `tests/stack.py`, `tests/test_integration.py` (worker kill, poison job, readiness) and `scripts/reset_test_data.py` with its test | Ran the full suite on my Mac and the public checker (15 passed, 0 failed, 0 skipped). Chose the guard: the script refuses unless `APP_ENV=test` and `--yes`. |
 | 2026-11-12 | Makuo (A) | Claude | Drafted the README, the playbook and the defense notes | Read them against the code and corrected what was wrong. Rehearsed the answers aloud. |
 | 2026-11-12 | Makuo (A) | Claude | Reviewed Saad's pull requests #9, #10 and #11 and drafted the review comments | Read the diffs, ran the tests, then approved and merged them myself. |
+| 2026-11-13 | Saad (B) | Claude | Wrote the worker-kill and poison-job drill commands for Docker Compose and the incident postmortem text (`docs/incident-postmortem.md`) | Ran both drills myself on the Compose stack, saved the logs, metrics, SQL checks and screenshots in `docs/evidence/`, and checked every number in the postmortem against those files |
+| 2026-11-13 | Saad (B) | Claude | Wrote `scripts/drill-k8s-kill.sh` (worker kill drill for the Kubernetes cluster) | Committed it before the code freeze. It was not run before the freeze, so the cluster drill is reported as planned |
+| 2026-11-14 | Saad (B) | Claude | Wrote my live demo helper script and speaking notes for the presentation (kept outside the repository) | Rehearsed the three demos on my machine and fixed a problem found in rehearsal (a leftover `DATABASE_URL` broke the Compose stack) |
+| 2026-11-15 | Saad (B) | Claude | Drafted my section of the report (worker, reliability and observability) | Checked every number against `docs/evidence/` (p95 JSON, drill logs, integrity files) and kept the cluster drill marked as planned |
 
 Not AI-assisted: team decisions, group messages and review comments.
 
